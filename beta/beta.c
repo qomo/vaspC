@@ -107,7 +107,8 @@ double beta(SCALAR3D* loc, SCALAR3D* locE, double applyE, int directionE,
         diffLoc[i]= locE->val[i]-loc->val[i];
     }
 
-    Threept3d(diffLoc, NGX, NGY, NGZ, DX, DY, DZ, diffE);
+    /*Threept3d(diffLoc, NGX, NGY, NGZ, DX, DY, DZ, diffE);*/
+    Fivept3d(diffLoc, NGX, NGY, NGZ, DX, DY, DZ, diffE);
 
     for (i=0; i<NGX; i++)
     for (j=0; j<NGY; j++)

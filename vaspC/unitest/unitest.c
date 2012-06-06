@@ -37,6 +37,9 @@ int main(int argc, char** argv)
     g_test_add_func ("/gradient/Threept3d/X",     check_Threept3dX);
     g_test_add_func ("/gradient/Threept3d/Y",     check_Threept3dY);
     g_test_add_func ("/gradient/Threept3d/Z",     check_Threept3dZ);
+    g_test_add_func ("/gradient/Fivept3d/X",        check_Fivept3dX);
+    g_test_add_func ("/gradient/Fivept3d/Y",        check_Fivept3dY);
+    g_test_add_func ("/gradient/Fivept3d/Z",        check_Fivept3dZ);
     /*sort*/
     g_test_add_func ("/sortcol/swap"  ,      check_swap);
     g_test_add_func ("/sortcol/insort" ,     check_insort);

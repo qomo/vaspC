@@ -40,6 +40,9 @@ void check_SCALAR3D_ReadVal();
 void check_Threept3dX();
 void check_Threept3dY();
 void check_Threept3dZ();
+void check_Fivept3dX();
+void check_Fivept3dY();
+void check_Fivept3dZ();
 
 /*insort.c*/
 void check_insort();
