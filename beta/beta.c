@@ -3,6 +3,7 @@
  * @Date 2012-04-18
  */
 #include "vaspC.h"
+#include "zone.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
@@ -13,22 +14,24 @@
  * @param [in] loc     LOCPOT
  * @param [in] locE    LOCPOT in external E field
  * @param [in] applyE  external E field (eV/A)
- * @param [in] vac     vacuum (Direct coordinates) 
+ * @param [in] directionE 0-X 1-Y 2-Z
+ * @param [in] allow   allowed zone (Direct coordinates) 
  * @param [out] max_pos position of max difference (Direct coordinate)
  * @param [out] max_vec vector of max difference (Direct coordinate)
  */
-double beta(SCALAR3D* loc, SCALAR3D* locE, double applyE, double vac[3][2], double skip[3][2], double max_pos[3], double max_vec[3])
+double beta(SCALAR3D* loc, SCALAR3D* locE, double applyE, int directionE,
+            double allow[3][2], 
+            double max_pos[3], double max_vec[3])
 {
     int i,j,k,n;
     double temp[3];
-    double d,c;
+    double d;
     double pos[3];
     
     
     int NGX,NGY,NGZ,TGRID;
     LATTICE *AXIS=NULL; 
     double LEN[3], DX,DY,DZ;
-    bool isSkip;
 
     LATTICE_Init(AXIS); 
 
@@ -99,43 +102,6 @@ double beta(SCALAR3D* loc, SCALAR3D* locE, double applyE, double vac[3][2], doub
     DY= LEN[1]/(double)NGY;
     DZ= LEN[2]/(double)NGZ;
 
-    isSkip=false;
-    for (i=0; i<3; i++)
-    {
-        if (skip[i][0]!=skip[i][1])
-        {
-            isSkip=true;
-        }
-    }
-
-    /* Construct skip region */
-    if (!isSkip)
-    {
-        for (i=0; i<3; i++)
-        {
-            if (vac[i][0]==vac[i][1])
-            {
-                skip[i][0]=0;
-                skip[i][1]=0;
-            }
-            else
-            {
-                d= (vac[i][1]-vac[i][0])*LEN[i];
-                if (d<=4.0)
-                {
-                    c= (vac[i][1]+vac[i][0])/2.0;
-                    skip[i][0]= (c-0.5*d)/LEN[i];
-                    skip[i][1]= (c+0.5*d)/LEN[i];
-                }
-                else
-                {
-                    skip[i][0]= vac[i][0]+4.0/LEN[i];
-                    skip[i][1]= vac[i][1]-4.0/LEN[i];
-                }
-            }
-        }
-    }
-
     for (i=0; i<TGRID; i++)
     {
         diffLoc[i]= locE->val[i]-loc->val[i];
@@ -187,11 +153,10 @@ double beta(SCALAR3D* loc, SCALAR3D* locE, double applyE, double vac[3][2], doub
                 pos[1]= (double)j/(double)NGY;
                 pos[2]= (double)k/(double)NGZ;
 
-                if (InVac(skip,pos))
-                {
-                    continue;
-                }
+                if (!InZone(allow,pos)) continue;
+
                 n=M3dT1d(i,j,k,NGX,NGY,NGZ);
+                if (diffE[n][directionE]<0) continue;
                 d= sqrt(dot3D(diffE[n],diffE[n]));
                 if (d>maxE)
                 {
@@ -210,5 +175,4 @@ double beta(SCALAR3D* loc, SCALAR3D* locE, double applyE, double vac[3][2], doub
     free(diffE);
 
     return maxE/applyE;
-
 }
