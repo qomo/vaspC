@@ -157,7 +157,7 @@ double beta(SCALAR3D* loc, SCALAR3D* locE, double applyE, int directionE,
                 if (!InZone(allow,pos)) continue;
 
                 n=M3dT1d(i,j,k,NGX,NGY,NGZ);
-                if (diffE[n][directionE]<0) continue;
+                if (diffE[n][directionE]>=0) continue;
                 d= sqrt(dot3D(diffE[n],diffE[n]));
                 if (d>maxE)
                 {
@@ -175,5 +175,5 @@ double beta(SCALAR3D* loc, SCALAR3D* locE, double applyE, int directionE,
     free(diffLoc);
     free(diffE);
 
-    return maxE/applyE;
+    return maxE/(-applyE);
 }

@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
     SCALAR3D *sca=NULL;
     SCALAR3D *scaE=NULL;
     double beta_value=0;
-    double E=0;
+    double E=0, EFIELD=0;
     int directionE=-1;
     double allow[3][2];
     double vac[3][2];
@@ -58,7 +58,7 @@ int main(int argc, char* argv[])
         fprintf(stderr,"Open %s failed.\n", argv[1]);          
         exit(1);
     }
-    else if ((sscanf(argv[3],"%lf",&E))!=1)
+    else if ((sscanf(argv[3],"%lf",&EFIELD))!=1)
     {
         fprintf(stderr,"The third argument is floatint number.\n");          
         exit(1);
@@ -77,6 +77,7 @@ int main(int argc, char* argv[])
 
 
     /*Init*/
+    E= -EFIELD;
     POSCAR_Init(pos);
     POSCAR_Init(posE);
     SCALAR3D_Init(sca);
@@ -103,16 +104,17 @@ int main(int argc, char* argv[])
     fclose(pfE);
 
     /*Output*/
-    printf("EFILED= %8.3f\n",E);
-    printf("BETA  = %8.3f\n",beta_value);
-    printf("VAC(a1)(Direct)  = %8.3f %8.3f \n",vac[0][0],vac[0][1]);
-    printf("VAC(a2)          = %8.3f %8.3f \n",vac[1][0],vac[1][1]);
-    printf("VAC(a3)          = %8.3f %8.3f \n",vac[2][0],vac[2][1]);
-    printf("ALLOW(a1)(Direct) = %8.3f %8.3f \n",allow[0][0],allow[0][1]);
-    printf("ALLOW(a2)         = %8.3f %8.3f \n",allow[1][0],allow[1][1]);
-    printf("ALLOW(a3)         = %8.3f %8.3f \n",allow[2][0],allow[2][1]);
-    printf("POS              = %8.3f %8.3f %8.3f\n",max_pos[0],max_pos[1],max_pos[2]);
-    printf("VEC              = %8.3f %8.3f %8.3f\n",max_vec[0],max_vec[1],max_vec[2]);
+    printf("BETA  = %8.3f\n\n",beta_value);
+    printf("EFILED              = %8.3f\n",EFIELD);
+    printf("E_apply             = %8.3f\n",E);
+    printf("Vacuum(a1)(Direct)  = %8.3f %8.3f \n",vac[0][0],vac[0][1]);
+    printf("Vacuum(a2)          = %8.3f %8.3f \n",vac[1][0],vac[1][1]);
+    printf("Vacuum(a3)          = %8.3f %8.3f \n",vac[2][0],vac[2][1]);
+    printf("Allowed zone(a1)(Direct)= %8.3f %8.3f \n",allow[0][0],allow[0][1]);
+    printf("Allowed zone(a2)        = %8.3f %8.3f \n",allow[1][0],allow[1][1]);
+    printf("Allowed zone(a3)        = %8.3f %8.3f \n",allow[2][0],allow[2][1]);
+    printf("POS        = %8.3f %8.3f %8.3f\n",max_pos[0],max_pos[1],max_pos[2]);
+    printf("E_loc      = %8.3f %8.3f %8.3f\n",max_vec[0],max_vec[1],max_vec[2]);
 
     /*Free*/
     POSCAR_Free(pos);
