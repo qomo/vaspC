@@ -3,5 +3,5 @@
 
 #include <stdbool.h>
 bool InZone(double vac[3][2], double pos[3]);
-void FindAllowed(POSCAR* pos, double vac[3][2], double allow[3][2]);
+void FindAllowed(POSCAR* pos, double vac[3][2], double allow[3][2], int flag);
 #endif

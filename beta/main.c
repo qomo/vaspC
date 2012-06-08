@@ -8,10 +8,13 @@
 #include "zone.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <getopt.h>
 
+static int zone_flag=1; /*1-full_zone, 0-restrict_zone*/
 
 int main(int argc, char* argv[])
 {
+    int c;
     int i,j;
 
     FILE *pf=NULL;
@@ -42,28 +45,57 @@ int main(int argc, char* argv[])
             allow[i][j]=0;
         }
     
+    /*getopt_long*/
+    while(1)
+    {
+        static struct option long_options[]={
+        {"full",     no_argument, 0, 'f'},
+        {"restrict", no_argument, 0, 'r'},
+        {         0,           0, 0, 0}
+        };
+
+        int option_index=0;
+
+        c= getopt_long(argc, argv, "rf", long_options, &option_index); 
+
+        if (c==-1) break;
+        switch(c)
+        {
+            case 'f':
+                zone_flag=1;
+                break;
+            case 'r':
+                zone_flag=0;
+                break;
+            case '?':
+                break;
+            default:
+                abort();
+        }
+    }   
+
     /*Check arguments*/
-    if (argc!=5)
+    if ((argc-optind)!=4)
     {
         fprintf(stderr, "Usage: beta.x [LOCPOT] [LOCPOT in E] [EFIELD] [0-X 1-Y 2-Z]\n"); 
         exit(1);
     }
-    else if ((pf=fopen(argv[1],"r"))==NULL)
+    else if ((pf=fopen(argv[optind],"r"))==NULL)
     {
-        fprintf(stderr,"Open %s failed.\n", argv[0]);          
+        fprintf(stderr,"Open %s failed.\n", argv[optind]);          
         exit(1);
     }
-    else if ((pfE=fopen(argv[2],"r"))==NULL)
+    else if ((pfE=fopen(argv[optind+1],"r"))==NULL)
     {
-        fprintf(stderr,"Open %s failed.\n", argv[1]);          
+        fprintf(stderr,"Open %s failed.\n", argv[optind+1]);          
         exit(1);
     }
-    else if ((sscanf(argv[3],"%lf",&EFIELD))!=1)
+    else if ((sscanf(argv[optind+2],"%lf",&EFIELD))!=1)
     {
         fprintf(stderr,"The third argument is floatint number.\n");          
         exit(1);
     }
-    else if ((sscanf(argv[4],"%d",&directionE))!=1)
+    else if ((sscanf(argv[optind+3],"%d",&directionE))!=1)
     {
         fprintf(stderr,"The forth argument is floatint number.\n");          
         exit(1);
@@ -86,15 +118,15 @@ int main(int argc, char* argv[])
 
     if ((SCALAR3D_READ(sca,pos,pf))!=0)
     {
-        fprintf(stderr,"Read %s failed\n", argv[1]);
+        fprintf(stderr,"Read %s failed\n", argv[optind]);
     }
     else if ((SCALAR3D_READ(scaE,posE,pfE))!=0)
     {
-        fprintf(stderr,"Read %s failed\n", argv[2]);
+        fprintf(stderr,"Read %s failed\n", argv[optind+1]);
     }
     else
     {
-        FindAllowed( pos, vac, allow);
+        FindAllowed( pos, vac, allow, zone_flag);
     }
         
     beta_value=beta(sca, scaE, E, directionE, allow, max_pos, max_vec);
