@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <getopt.h>
 
-static int zone_flag=1; /*1-full_zone, 0-restrict_zone*/
+static int zone_flag=2; /*1-full_zone, 0-restrict_zone, 2-outer surface zone*/
 static int algo_flag=5; /*2-two points, 5-five points*/
 
 int main(int argc, char* argv[])
@@ -52,6 +52,7 @@ int main(int argc, char* argv[])
         static struct option long_options[]={
         {"full",     no_argument, 0, 'f'},
         {"restrict", no_argument, 0, 'r'},
+        {"surface",  no_argument, 0, 's'},
         {"two_points", no_argument, 0, '2'},
         {"five_points", no_argument, 0, '5'},
         {         0,           0, 0, 0}
@@ -59,7 +60,7 @@ int main(int argc, char* argv[])
 
         int option_index=0;
 
-        c= getopt_long(argc, argv, "25rf", long_options, &option_index); 
+        c= getopt_long(argc, argv, "25rfs", long_options, &option_index); 
 
         if (c==-1) break;
         switch(c)
@@ -69,6 +70,9 @@ int main(int argc, char* argv[])
                 break;
             case 'r':
                 zone_flag=0;
+                break;
+            case 's':
+                zone_flag=2;
                 break;
             case '2':
                 algo_flag=2;

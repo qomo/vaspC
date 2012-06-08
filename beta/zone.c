@@ -103,8 +103,18 @@ void FindAllowed(POSCAR* pos, double vac[3][2], double allow[3][2], int flag)
             allow[i][1]= vac[i][0] + 0.25*(vac[i][1]-vac[i][0]);
         }
     }
+    else if (flag==2) /*surface zone*/
+    {
+        for (i=0; i<3; i++) 
+        {
+            if (vac[i][0]==vac[i][1]) continue;
+            allow[i][0]= vac[i][0];
+            allow[i][1]= vac[i][0] + 0.25*(vac[i][1]-vac[i][0]);
+        }
+    }
     else
     {
         fprintf(stderr, "FindAllowed: Interal Error %d\n", flag);
+        exit(1);
     }
 }
