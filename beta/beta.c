@@ -21,7 +21,8 @@
  */
 double beta(SCALAR3D* loc, SCALAR3D* locE, double applyE, int directionE,
             double allow[3][2], 
-            double max_pos[3], double max_vec[3])
+            double max_pos[3], double max_vec[3],
+            int algo_flag)
 {
     int i,j,k,n;
     double temp[3];
@@ -107,8 +108,15 @@ double beta(SCALAR3D* loc, SCALAR3D* locE, double applyE, int directionE,
         diffLoc[i]= locE->val[i]-loc->val[i];
     }
 
-    /*Threept3d(diffLoc, NGX, NGY, NGZ, DX, DY, DZ, diffE);*/
-    Fivept3d(diffLoc, NGX, NGY, NGZ, DX, DY, DZ, diffE);
+    if (algo_flag==2)
+        Threept3d(diffLoc, NGX, NGY, NGZ, DX, DY, DZ, diffE);
+    else if (algo_flag==5)
+        Fivept3d(diffLoc, NGX, NGY, NGZ, DX, DY, DZ, diffE);
+    else
+    {
+        fprintf(stderr,"beta: internal error. %d\n", algo_flag);
+        exit(1);
+    }
 
     for (i=0; i<NGX; i++)
     for (j=0; j<NGY; j++)
