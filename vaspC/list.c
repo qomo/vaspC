@@ -111,3 +111,16 @@ LIST* LIST_Item(LIST* list, int index)
     }
     return node;
 }
+
+int LIST_NItem(LIST* list)
+{
+    int ncount=0;
+    if (list==NULL) return 0;
+    LIST* next=list->next;
+    while(next) 
+    {
+        next= next->next;
+        ncount++; 
+    }
+    return ncount; 
+}

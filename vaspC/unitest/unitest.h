@@ -61,6 +61,7 @@ void check_InVac();
 /*list.c*/
 void check_LIST_Append();
 void check_LIST_Item();
+void check_LIST_NItem();
 
 /*potcar.c*/
 void check_POTCAR_Read();

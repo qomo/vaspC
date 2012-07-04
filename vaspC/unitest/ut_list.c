@@ -74,3 +74,27 @@ void check_LIST_Item()
 
     LIST_Free(list);
 }
+
+void check_LIST_NItem()
+{
+    int    num0=10;
+    double num1=20;
+    char   num2='w';
+    LIST* list=NULL;
+    
+    g_assert_cmpint(LIST_NItem(list),==,0);
+
+    LIST_Init(list);
+    g_assert_cmpint(LIST_NItem(list),==,0);
+
+    LIST_Append(list, &num0, sizeof(num0));
+    g_assert_cmpint(LIST_NItem(list),==,1);
+
+    LIST_Append(list, &num1, sizeof(num1));
+    g_assert_cmpint(LIST_NItem(list),==,2);
+
+    LIST_Append(list, &num2, sizeof(num2));
+    g_assert_cmpint(LIST_NItem(list),==,3);
+
+    LIST_Free(list);
+}
