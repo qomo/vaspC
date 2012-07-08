@@ -67,4 +67,8 @@ void check_LIST_NItem();
 void check_POTCAR_Read();
 /*outcar.c*/
 void check_OUTCAR_Read();
+
+/*incar.c*/
+void check_INCAR_Read();
+void check_INCAR_Set();
 #endif

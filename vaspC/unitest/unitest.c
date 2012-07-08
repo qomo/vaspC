@@ -55,5 +55,7 @@ int main(int argc, char** argv)
     g_test_add_func ("/list/NItem"  ,        check_LIST_NItem);
     g_test_add_func ("/POTCAR/Read"  ,       check_POTCAR_Read);
     g_test_add_func ("/OUTCAR/Read"  ,       check_OUTCAR_Read);
+    g_test_add_func ("/INCAR/Read"  ,        check_INCAR_Read);
+    g_test_add_func ("/INCAR/Set"  ,         check_INCAR_Set);
     return g_test_run();
  }

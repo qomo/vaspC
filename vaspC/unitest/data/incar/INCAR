@@ -1,0 +1,135 @@
+## Date: 2012-05-31
+
+#SYSTEM =               
+ISTART  = 0             ## Start job: 0-new 1-cont 2-samecut
+ISPIN   = 1             
+
+############       Precision     ################
+#PREC   =               
+#ENCUT  =               
+#NGX    =               
+#NGY    =               
+#NGZ    =               
+
+############       Relax         ################
+NSW     = 0             
+ISIF    = 2             ## 2-Ion only 3-All 
+                        ## 4-Ion and cell shape (Fix Volume)
+#FIXAXIS =              ## Only for 151 VASP.Huang
+
+IBRION  = 2             ## 0-MD 1-Quai-Newton 2-CG
+
+EDIFF   = 1E-4          ## Default: 10e-4
+EDIFFG  = -0.001        ## Default: EDIFF * 10 
+
+#POTIM  =               ## Default: 0.5 for relaxion
+
+
+############       Electron       #################
+
+## Smearing
+ISMEAR  = 0             ## Default: 1
+SIGMA   = 0.001         ## Default: 0.2
+
+##Symmetry
+#ISYM   =               ## 0-off  1-US-PP  2-PAW 
+#SYMPREC =               ## Default: 1e-5 
+
+##
+#NELECT =               ## Number of electrons 
+#NBANDS =               ## Number of bands
+
+## Algorithm
+#IALGO  = 38            ## 38-Kosugi algorithm  
+                        ## 48-preconditioned residuum-minimization
+
+## Electron Relaxtion Step
+#NELMDL =               
+#NELMIN =               
+#NELM   =               
+
+## NONCOLLINEAR
+#LNONCOLLINEAR = T
+#MAGMOM  =
+#SAXIS   = 0 0 1         ## Spin quantization axis  
+
+## Spin-Oribtal
+#WSOC    = 1.0           ## weighting
+#LSORBIT = T
+#LMAXMIX =               ## 4-d orbital 6-f orbital
+#SAXIS   = 0 0 1         ## Spin quantization axis  
+#MAGMOM  =
+#NBANDS  =               ## 2 * number of bands of collinear run
+
+## Hybrid functional (VASP 5.2)
+#LHFCALC = T             ## Hatree-Fock
+#HFSCREEN= 0.2           ## Turn on swith PBE0 and HSE06
+#NBANDS  =               ## Number of occupied bands for insulator or semiconductor
+#ALGO    = ALL           ## All     Insulator or semiconductor
+                         ## Damped  For metals and small gap semiconductors
+                         
+#TIME    = 0.4           
+#PRECFOCK= FAST          ## Normal for high quality calculations
+#NKRED   = 2             ## Omit flag for high quality calculations
+
+############       Band       #################
+
+## Hybrid functional (VASP 5.2)
+#LHFCALC = T             ## Hatree-Fock
+#HFSCREEN= 0.2           ## Turn on swith PBE0 and HSE06
+#NBANDS  =               ## Number of occupied bands for insulator or semiconductor
+#ALGO    = Normal        ## Davidson 
+
+
+
+#PRECFOCK= FAST          ## Normal for high quality calculations
+#NKRED   = 1            
+#NELMIN = 5              ## Davidson, Minimum 5 scf-steps 
+#IMIX = 1                ## Kerker mixing
+
+################ Projection  ##################
+##PROCAR I/O
+#RWIGS  =               
+#LORBIT =               ## 10 DOSCAR and PROCAR file
+                         ## 11 DOSCAR and lm decomposed PROCAR file
+
+################ Local Potential ##################
+LVTOT   = F             
+
+################ DIPOL CORRECTION ##################
+LDIPOL  = F             
+#IDIPOL =               ## 1-X 2-Y 3-Z 4-All
+#EFIELD =               ## Electric Field
+
+################  Charge    ################### 
+LCHARG  = F             
+LAECHG  = F             
+#ICHARG =               ## Init: 0-WAVECAR 1-CHGCAR 2-Atom 
+                        ##       10-const
+                        ## Default: 2 if ISTART=0 else 0
+#NGXF   =               
+#NGYF   =               
+#NGZF   =               
+
+##################################################################
+## Enhances the magnetic moments and the magnetic energies
+## interpolation formula 
+## for the correlation part of the exchange correlation functional
+## according to Vosko Wilk and Nusair
+#VOSKOWN =               ## DEFAULT: 0 Turn on: 1
+##################################################################
+
+#############    Wavefunction  ###################
+LWAVE   = F             
+##################################################
+
+#############    Real Space    ###################
+#LREAL = T
+##################################################
+
+########     Linux Parallelisation  ##############
+LPLANE  = T             
+LSCALU  = F             
+NSIM    = 4             
+NPAR    = 1             
+##################################################
