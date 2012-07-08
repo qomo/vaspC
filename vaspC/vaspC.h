@@ -24,6 +24,7 @@
 #include "potcar.h"
 #include "outcar.h"
 #include "field.h"
+#include "incar.h"
 
 /*Surface*/
 #include "vacuum.h"
