@@ -21,6 +21,8 @@
   SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **********************************************************************/
 
+%option prefix="incar_"
+%option outfile="incar.lex.c"
 %option noyywrap nodefault yylineno
 %x ARG
 
@@ -42,27 +44,27 @@ EXP ([Ee][-+]?[0-9]+)
 
 <INITIAL>[a-zA-Z0-9][a-zA-Z0-9]* {
         unsigned int i;
-        yylval.s = malloc(sizeof(char)*(strlen(yytext)+1));
-        strncpy(yylval.s, yytext,strlen(yytext));
-        yylval.s[strlen(yytext)]='\0';
-        for (i=0; i<strlen(yytext)+1; i++)
+        incar_lval.s = malloc(sizeof(char)*(strlen(incar_text)+1));
+        strncpy(incar_lval.s, incar_text,strlen(incar_text));
+        incar_lval.s[strlen(incar_text)]='\0';
+        for (i=0; i<strlen(incar_text)+1; i++)
         {
-            yylval.s[i]= toupper(yylval.s[i]);
+            incar_lval.s[i]= toupper(incar_lval.s[i]);
         }
         return LABEL;
     }
-<INITIAL>"=" {BEGIN ARG; return yytext[0];}
+<INITIAL>"=" {BEGIN ARG; return incar_text[0];}
 
-<ARG>[Tt]{1}|"."(?i:TRUE)"."    {yylval.s= "T"; return BOOL;}
-<ARG>[Ff]{1}|"."(?i:FALSE)"."   {yylval.s= "F"; return BOOL;}
-<ARG>[-+]?[0-9]+{EXP}|[-+]?[0-9]+"."[0-9]*{EXP}?|[-+]?"."[0-9]+{EXP}? { yylval.s=yytext; return FLOAT;}
+<ARG>[Tt]{1}|"."(?i:TRUE)"."    {incar_lval.s= "T"; return BOOL;}
+<ARG>[Ff]{1}|"."(?i:FALSE)"."   {incar_lval.s= "F"; return BOOL;}
+<ARG>[-+]?[0-9]+{EXP}|[-+]?[0-9]+"."[0-9]*{EXP}?|[-+]?"."[0-9]+{EXP}? { incar_lval.s=incar_text; return FLOAT;}
 <ARG>[-+]?[0-9]+ { 
-        yylval.s = malloc(sizeof(char)*(strlen(yytext)+1));
-        strncpy(yylval.s, yytext,strlen(yytext));
-        yylval.s[strlen(yytext)]='\0';
+        incar_lval.s = malloc(sizeof(char)*(strlen(incar_text)+1));
+        strncpy(incar_lval.s, incar_text,strlen(incar_text));
+        incar_lval.s[strlen(incar_text)]='\0';
         return INT;
     }
-<ARG>[a-zA-Z0-9]+ { yylval.s= yytext; return STR;}
+<ARG>[a-zA-Z0-9]+ { incar_lval.s= incar_text; return STR;}
 
-<INITIAL,ARG>.      {yyerror("Mystery character %c\n", *yytext);}
+<INITIAL,ARG>.      {incar_error("Mystery character %c\n", *incar_text);}
 %%

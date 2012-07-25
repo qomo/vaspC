@@ -28,10 +28,10 @@
 #include "list.h"
 #include <stdio.h>
 
-extern int yylineno; /* from lexer */
-extern FILE *yyin;
-extern int yyparse();
-extern int yylex();
+extern int incar_lineno; /* from lexer */
+extern FILE *incar_in;
+extern int incar_parse();
+extern int incar_lex();
 
 enum
 {
@@ -82,6 +82,6 @@ void INCAR_RawWrite(INCAR* incar, FILE* pf);
 void INCAR_Get(INCAR* incar, char* name, int *type, int *nargs, void** data);
 void INCAR_Set(INCAR* incar, char* name, int type, int nargs, void* data);
 
-void yyerror(char *s, ...);
+void incar_error(char *s, ...);
 
 #endif

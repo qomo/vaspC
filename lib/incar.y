@@ -27,6 +27,8 @@
 #include <stdlib.h>
 %}
 
+%name-prefix "incar_"
+
 %union{
     char* s; 
     TYPELIST* tp_list;

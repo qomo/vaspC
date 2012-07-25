@@ -36,7 +36,7 @@ TYPELIST* TYPELIST_New()
     tplist= malloc(sizeof(TYPELIST));
     if (!tplist)
     {
-        yyerror("Out of memory!!");
+        incar_error("Out of memory!!");
         exit(0);
     }
 
@@ -50,12 +50,12 @@ TYPELIST* TYPELIST_Cat(TYPELIST* tplist, char* text, int type)
 {
     if (tplist==NULL)
     {
-        yyerror("Internal Error: tplist is a null pointer.");
+        incar_error("Internal Error: tplist is a null pointer.");
         exit(0);
     }
     if (text == NULL)
     {
-        yyerror("Internal Error: text is a null pointer.");
+        incar_error("Internal Error: text is a null pointer.");
         exit(0);
     }
 
@@ -69,7 +69,7 @@ void _TYPELIST_Free(TYPELIST** ptplist)
 {
     if ((*ptplist)==NULL)
     {
-        yyerror("Internal Error: tplist is a null pointer.");
+        incar_error("Internal Error: tplist is a null pointer.");
         exit(0);
     }
     
@@ -79,12 +79,12 @@ void _TYPELIST_Free(TYPELIST** ptplist)
     (*ptplist)=NULL;
 }
 
-void yyerror(char *s, ...)
+void incar_error(char *s, ...)
 {
     va_list ap;
     va_start(ap, s);
     
-    fprintf(stderr, "%d: error: ", yylineno);
+    fprintf(stderr, "%d: error: ", incar_lineno);
     vfprintf(stderr, s, ap);
     fprintf(stderr, "\n");
 }
@@ -121,7 +121,7 @@ SYMBOL* Lookup(char* sym)
 
         if (++sp>=symtab+NHASH) sp= symtab; /*try the next entry*/
     }
-    yyerror("symbol table overflow\n");
+    incar_error("symbol table overflow\n");
     abort(); /*tried them all, table is full*/
 }
 
@@ -130,19 +130,19 @@ void SYMBOL_Assignment(SYMBOL* sym, TYPELIST* tplist)
     int i;
     if (sym==NULL)
     {
-        yyerror("Internal Error: sym is a null pointer.");
+        incar_error("Internal Error: sym is a null pointer.");
         exit(0);
     }
     if (tplist==NULL)
     {
-        yyerror("Internal Error: tplist is a null pointer");
+        incar_error("Internal Error: tplist is a null pointer");
         exit(0);
     }
 
     sym->type= tplist->type;
     if (sym->type==TYPE_NULL)
     {
-        yyerror("Internal Error: tplist->type is TYPE_NULL.");
+        incar_error("Internal Error: tplist->type is TYPE_NULL.");
         exit(0);
     }
 
@@ -165,7 +165,7 @@ void SYMBOL_Assignment(SYMBOL* sym, TYPELIST* tplist)
                 }
                 else
                 {
-                    yyerror("Internal Error: Parse Bool Value Failed. %s",text);
+                    incar_error("Internal Error: Parse Bool Value Failed. %s",text);
                     exit(0);
                 }
             }
@@ -178,7 +178,7 @@ void SYMBOL_Assignment(SYMBOL* sym, TYPELIST* tplist)
                 char* text= LIST_Item(tplist->list, i)->val;
                 if (sscanf(text, "%d", &pint[i])!=1)
                 {
-                    yyerror("Internal Error: Parse Int value Failed. %s",text);
+                    incar_error("Internal Error: Parse Int value Failed. %s",text);
                     exit(0);
                 }
             }
@@ -191,7 +191,7 @@ void SYMBOL_Assignment(SYMBOL* sym, TYPELIST* tplist)
                 char* text= LIST_Item(tplist->list, i)->val;
                 if (sscanf(text, "%lf", &pdouble[i])!=1)
                 {
-                    yyerror("Internal Error: Parse Double value Failed. %s",text);
+                    incar_error("Internal Error: Parse Double value Failed. %s",text);
                     exit(0);
                 }
             }
@@ -208,7 +208,7 @@ void SYMBOL_Assignment(SYMBOL* sym, TYPELIST* tplist)
             }
             break;
         default:
-            yyerror("Internal Error: sym->type is not a valid value.");
+            incar_error("Internal Error: sym->type is not a valid value.");
             exit(0);
     }
 }
@@ -270,12 +270,12 @@ void INCAR_Read(INCAR* incar, FILE* pf)
 
     if (pf==stdin)
     {
-        yyparse();
+        incar_parse();
     }
     else
     {
-        yyin= pf;
-        yyparse();
+        incar_in= pf;
+        incar_parse();
     }
     for (i=0; i<NHASH; i++)
     {
@@ -307,7 +307,7 @@ void INCAR_RawWrite(INCAR* incar, FILE* fp)
         switch (incar->symtab[i].type)
         {
             case TYPE_NULL:
-                yyerror("Internal Error: incar->symtab.type is TYPE_NULL");
+                incar_error("Internal Error: incar->symtab.type is TYPE_NULL");
                 exit(0);
                 break;
             case TYPE_BOOL:
