@@ -19,4 +19,4 @@ test: vaspC.a
 	cd unitest && make test
 
 clean:
-	rm -f *.o vaspC.a
+	rm -f *.o vaspC.a incar.lex.c incar.tab.c incar.tab.h
