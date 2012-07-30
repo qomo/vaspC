@@ -4,7 +4,7 @@
 	MAKEFLAGS += -r
 CC=gcc
 
-vaspC.a: outcar.o potcar.o list.o lattice.o line.o element.o poscar.o vmath.o field.o gradient.o vacuum.o insort.o swap.o incar.o incar.tab.o incar.lex.o
+vaspC.a: outcar.o potcar.o list.o lattice.o line.o element.o poscar.o vmath.o field.o gradient.o vacuum.o insort.o swap.o incar.o incar.tab.o incar.lex.o hash.o
 	ar rcs $@ $^	
 
 %.o: %.c

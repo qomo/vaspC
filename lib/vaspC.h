@@ -7,6 +7,7 @@
 
 /*AD*/
 #include "list.h"
+#include "hash.h"
 
 /*etc.*/
 #include "line.h"

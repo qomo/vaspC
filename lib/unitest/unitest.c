@@ -57,5 +57,11 @@ int main(int argc, char** argv)
     g_test_add_func ("/OUTCAR/Read"  ,       check_OUTCAR_Read);
     g_test_add_func ("/INCAR/Read"  ,        check_INCAR_Read);
     g_test_add_func ("/INCAR/Set"  ,         check_INCAR_Set);
+    g_test_add_func ("/HASH/base36"  ,       check_base36);
+    g_test_add_func ("/HASH/equal_str",      check_equal_str);
+    g_test_add_func ("/HASH/fold"  ,         check_fold);
+    g_test_add_func ("/HASH/New_Free"  ,     check_hash_new_free);
+    g_test_add_func ("/HASH/Lookup"  ,       check_hash_lookup);
+    g_test_add_func ("/HASH/Set_Get"  ,    check_hash_set_get);
     return g_test_run();
  }
