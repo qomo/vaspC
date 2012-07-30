@@ -3,7 +3,7 @@
 CC=gcc
 
 all:
-	cd vaspC && make
+	cd lib && make
 	cd beta && make
 
 test:
