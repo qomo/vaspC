@@ -92,5 +92,10 @@ void check_hash_set_get()
     double* ret_d1= HASH_Get(hash, "10");
     g_assert_cmpfloat(d1,==,*ret_d1);
 
+
+    int i1=12345;
+    int* ret4= HASH_Set(hash, "12345", &i1, sizeof(int));
+    g_assert_cmpint(*ret4,==,i1);
+
     HASH_Free(hash);
 }

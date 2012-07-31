@@ -70,6 +70,9 @@ void HASH_Free(HASH* hash)
 
 KEY_VALUE* HASH_Lookup(HASH* hash, char* key)
 {
+
+    printf("Lookup:%s.\n", key);
+
     int address= (hash->func(key))%(hash->size);
     int count= hash->size;
     KEY_VALUE* key_value= &(hash->table[address]);
@@ -131,6 +134,7 @@ bool equal_str(char* str1, char* str2)
 
 int base36(char* text)
 {
+    printf("base36:%s.\n", text);
     int num=0;
     int i;
     for ( i=strlen(text)-1; i>=0; i--)
@@ -143,7 +147,7 @@ int base36(char* text)
             num+=(c-87)*((int)(ipow(36,i)));
         else
         {
-            fprintf(stderr, "character out of range.");
+            fprintf(stderr, "base36: string %s, character %d is out of range.",text,i);
             exit(1);
         } 
     }
@@ -172,7 +176,7 @@ int fold(char* key)
 
     for (s=0; s<strlen(key); s+=fold_length)
     {
-        char* str= malloc(fold_length+1);
+        char* str= malloc(sizeof(char)*(fold_length+1));
         if (str==NULL)
         {
             fprintf(stderr, "Memory Allocate Error!");
@@ -181,18 +185,10 @@ int fold(char* key)
         else
         {
             strncpy(str, key+s, fold_length);
+            str[fold_length]='\0';
             ret+= base36(str);
         }
         free(str);
-    }
-
-    if (strlen(key)%fold_length!=0)
-    {
-        int s;
-        char *str= malloc(fold_length);
-        for (s=0; s<fold_length; s++) str[s]='\0';
-        strncpy(str, key+(strlen(key)-(strlen(key)%fold_length)),fold_length);
-        free(str); 
     }
 
     return ret%fold_mod;
