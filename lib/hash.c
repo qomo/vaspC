@@ -70,9 +70,6 @@ void HASH_Free(HASH* hash)
 
 KEY_VALUE* HASH_Lookup(HASH* hash, char* key)
 {
-
-    printf("Lookup:%s.\n", key);
-
     int address= (hash->func(key))%(hash->size);
     int count= hash->size;
     KEY_VALUE* key_value= &(hash->table[address]);
@@ -134,7 +131,6 @@ bool equal_str(char* str1, char* str2)
 
 int base36(char* text)
 {
-    printf("base36:%s.\n", text);
     int num=0;
     int i;
     for ( i=strlen(text)-1; i>=0; i--)
