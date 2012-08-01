@@ -60,7 +60,7 @@ TYPELIST* TYPELIST_Cat(TYPELIST* tplist, char* text, int type)
     }
 
     tplist->type= type;
-    LIST_Append(tplist->list, text, sizeof(char)*(strlen(text)+1));
+    LIST_Append(tplist->list, text);
 
     return tplist;
 }

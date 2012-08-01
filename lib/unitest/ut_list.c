@@ -11,18 +11,18 @@ void check_LIST_Append()
     LIST* list=NULL;
     LIST_Init(list);
 
-    LIST_Append(list, &num1, sizeof(num1));
-    LIST_Append(list, &num2, sizeof(num2));
-    LIST_Append(list, &num3, sizeof(num3));
+    LIST_Append(list, POINTER_MALLOC(&num1, int, 1));
+    LIST_Append(list, POINTER_MALLOC(&num2, double, 1));
+    LIST_Append(list, POINTER_MALLOC(&num3, char, 1));
    
     node=list->next;
-    g_assert(*((int*)(node->val))==num1);
+    g_assert(*((int*)(node->val))==10);
 
     node=node->next;
-    g_assert(*((double*)(node->val))==num2);
+    g_assert(*((double*)(node->val))==20);
 
     node=node->next;
-    g_assert(*((char*)(node->val))==num3);
+    g_assert(*((char*)(node->val))=='w');
 
     LIST_Free(list);
 }
@@ -44,10 +44,10 @@ void check_LIST_Item()
 
     LIST_Init(list);
 
-    LIST_Append(list, &num0, sizeof(num0));
-    LIST_Append(list, &num1, sizeof(num1));
-    LIST_Append(list, &num2, sizeof(num2));
-   
+    LIST_Append(list, POINTER_MALLOC(&num0, int, 1));
+    LIST_Append(list, POINTER_MALLOC(&num1, double, 1));
+    LIST_Append(list, POINTER_MALLOC(&num2, char, 1));
+
     node0=list->next;
     node1=node0->next;
     node2=node1->next;
@@ -87,13 +87,13 @@ void check_LIST_NItem()
     LIST_Init(list);
     g_assert_cmpint(LIST_NItem(list),==,0);
 
-    LIST_Append(list, &num0, sizeof(num0));
+    LIST_Append(list, POINTER_MALLOC(&num0, int, 1));
     g_assert_cmpint(LIST_NItem(list),==,1);
 
-    LIST_Append(list, &num1, sizeof(num1));
+    LIST_Append(list, POINTER_MALLOC(&num1, double, 1));
     g_assert_cmpint(LIST_NItem(list),==,2);
 
-    LIST_Append(list, &num2, sizeof(num2));
+    LIST_Append(list, POINTER_MALLOC(&num2, char, 1));
     g_assert_cmpint(LIST_NItem(list),==,3);
 
     LIST_Free(list);

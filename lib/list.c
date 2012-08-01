@@ -39,22 +39,14 @@ void _LIST_Free(LIST** plist)
     *plist=NULL;
 }
 
-void LIST_Append(LIST* list, void* data, int size)
+void LIST_Append(LIST* list, void* data)
 {
     LIST* last_node=NULL;
-
-    /* Argument Check */
-    if (size<=0)
-    {
-        fprintf(stderr,"LIST_Append size <= 0\n");
-        exit(1);
-    }
         
     /*Create List Note*/
     LIST* node=NULL; 
     node= malloc(sizeof(LIST));
-    node->val=malloc(size);
-    memcpy(node->val, data, size);
+    node->val= data;
     node->next=NULL;
     node->prev=NULL;
 

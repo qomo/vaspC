@@ -1,6 +1,7 @@
 #include "outcar.h"
 #include "line.h"
 #include "list.h"
+#include "util.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -44,7 +45,7 @@ void OUTCAR_Read(OUTCAR* out,FILE* pf)
             continue;        
         else
         {
-            LIST_Append(list_fermi,&value,sizeof(double));     
+            LIST_Append(list_fermi,POINTER_MALLOC(&value,double,1));     
             out->nfermi++;  
         }
     }
