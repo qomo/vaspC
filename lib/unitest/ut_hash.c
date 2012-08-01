@@ -68,7 +68,7 @@ void check_hash_set_get()
     HASH* hash= HASH_New(100,fold,equal_str);
 
     char* str1="ten";
-    char* ret1= HASH_Set(hash, "10", str1, sizeof(char)*(strlen(str1)+1));
+    char* ret1= HASH_Set(hash, "10", POINTER_MALLOC(str1, char, strlen(str1)+1));
     g_assert_cmpstr(str1,==,ret1);
 
     KEY_VALUE* key_value= HASH_Lookup(hash, "10");
@@ -76,7 +76,7 @@ void check_hash_set_get()
     g_assert_cmpstr(key_value->value,==,"ten");
 
     char* str2="tenten";
-    char* ret2= HASH_Set(hash, "10", str2, sizeof(char)*(strlen(str2)+1));
+    char* ret2= HASH_Set(hash, "10", POINTER_MALLOC(str2, char, strlen(str2)+1));
     g_assert_cmpstr(str2,==,ret2);
 
     KEY_VALUE* key_value2= HASH_Lookup(hash, "10");
@@ -88,13 +88,13 @@ void check_hash_set_get()
 
 
     double d1= 10.;
-    HASH_Set(hash, "10", &d1, sizeof(double));
+    HASH_Set(hash, "10", POINTER_MALLOC(&d1, double,1));
     double* ret_d1= HASH_Get(hash, "10");
     g_assert_cmpfloat(d1,==,*ret_d1);
 
 
     int i1=12345;
-    int* ret4= HASH_Set(hash, "12345", &i1, sizeof(int));
+    int* ret4= HASH_Set(hash, "12345", POINTER_MALLOC(&i1, int, 1));
     g_assert_cmpint(*ret4,==,i1);
 
     HASH_Free(hash);

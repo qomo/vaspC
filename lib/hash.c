@@ -98,20 +98,14 @@ KEY_VALUE* HASH_Lookup(HASH* hash, char* key)
     exit(1);
 }
 
-void* HASH_Set(HASH* hash, char* key, void* value, size_t nbyte)
+void* HASH_Set(HASH* hash, char* key, void* value)
 {
     KEY_VALUE *key_value= HASH_Lookup(hash, key);
 
-    if (key_value->value!=NULL)
-        free(key_value->value);
+    if (key_value->value!=NULL) free(key_value->value);
 
-    key_value->value= malloc(nbyte); 
-    if (key_value->value==NULL)
-    {
-        fprintf(stderr, "Memory Allocate Error.");
-        exit(1); 
-    }
-    memcpy(key_value->value, value, nbyte);
+    key_value->value= value;
+
     return key_value->value;
 }
 
@@ -143,7 +137,7 @@ int base36(char* text)
             num+=(c-87)*((int)(ipow(36,i)));
         else
         {
-            fprintf(stderr, "base36: string %s, character %d is out of range.",text,i);
+            fprintf(stderr, "base36: string %s, character %d is out of range.",text,j);
             exit(1);
         } 
     }
