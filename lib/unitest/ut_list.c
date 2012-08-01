@@ -98,3 +98,27 @@ void check_LIST_NItem()
 
     LIST_Free(list);
 }
+
+void check_LIST_Get()
+{
+    int    num0=10;
+    double num1=20;
+    char   num2='w';
+
+    LIST* list=NULL;
+    LIST_Init(list);
+
+    LIST_Append(list, POINTER_MALLOC(&num0, int, 1));
+    LIST_Append(list, POINTER_MALLOC(&num1, double, 1));
+    LIST_Append(list, POINTER_MALLOC(&num2, char, 1));
+  
+    int*    p0= LIST_Get(list, 0);
+    double* p1= LIST_Get(list, 1);
+    char*   p2= LIST_Get(list, 2);
+
+    g_assert_cmpint(*p0,==,10);
+    g_assert_cmpfloat(*p1,==,20);
+    g_assert(*p2=='w');
+
+    LIST_Free(list);
+}

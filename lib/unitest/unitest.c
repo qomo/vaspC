@@ -52,6 +52,7 @@ int main(int argc, char** argv)
     g_test_add_func ("/vacuum/In"  ,         check_InVac);
     g_test_add_func ("/list/Append"  ,       check_LIST_Append);
     g_test_add_func ("/list/Item"  ,         check_LIST_Item);
+    g_test_add_func ("/list/Get"  ,          check_LIST_Get);
     g_test_add_func ("/list/NItem"  ,        check_LIST_NItem);
     g_test_add_func ("/POTCAR/New_Free",     check_POTCAR_New_Free);
     g_test_add_func ("/POTCAR/Set_Get",      check_POTCAR_Set_Get);

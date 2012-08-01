@@ -16,6 +16,7 @@ void _LIST_Free(LIST** plist);
 #define  LIST_Free(x) _LIST_Free(&x)
 void LIST_Append(LIST* list, void* data);
 LIST* LIST_Item(LIST* list, int index);
+void* LIST_Get(LIST* list, int index);
 int LIST_NItem(LIST* list);
 
 #endif

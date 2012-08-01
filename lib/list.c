@@ -104,6 +104,12 @@ LIST* LIST_Item(LIST* list, int index)
     return node;
 }
 
+void* LIST_Get(LIST* list, int index)
+{
+    LIST* ret= LIST_Item(list, index);
+    return ret->val;
+}
+
 int LIST_NItem(LIST* list)
 {
     int ncount=0;

@@ -62,6 +62,7 @@ void check_InVac();
 void check_LIST_Append();
 void check_LIST_Item();
 void check_LIST_NItem();
+void check_LIST_Get();
 
 /*potcar.c*/
 void check_POTCAR_New_Free();
