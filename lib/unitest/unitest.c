@@ -53,7 +53,10 @@ int main(int argc, char** argv)
     g_test_add_func ("/list/Append"  ,       check_LIST_Append);
     g_test_add_func ("/list/Item"  ,         check_LIST_Item);
     g_test_add_func ("/list/NItem"  ,        check_LIST_NItem);
-    g_test_add_func ("/POTCAR/Read"  ,       check_POTCAR_Read);
+    g_test_add_func ("/POTCAR/New_Free",     check_POTCAR_New_Free);
+    g_test_add_func ("/POTCAR/Set_Get",      check_POTCAR_Set_Get);
+    g_test_add_func ("/POTCAR/File_Count",   check_File_Count_POTCAR);
+    g_test_add_func ("/POTCAR/Array_New_Free",check_POTCAR_Array_New_Free);
     g_test_add_func ("/OUTCAR/Read"  ,       check_OUTCAR_Read);
     g_test_add_func ("/INCAR/Read"  ,        check_INCAR_Read);
     g_test_add_func ("/INCAR/Set"  ,         check_INCAR_Set);

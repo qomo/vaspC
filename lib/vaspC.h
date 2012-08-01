@@ -16,6 +16,7 @@
 #include "gradient.h"
 #include "swap.h"
 #include "insort.h"
+#include "util.h"
 
 /*Object*/
 #include "element.h"
@@ -29,5 +30,6 @@
 
 /*Surface*/
 #include "vacuum.h"
+
 
 #endif

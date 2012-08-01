@@ -64,7 +64,11 @@ void check_LIST_Item();
 void check_LIST_NItem();
 
 /*potcar.c*/
-void check_POTCAR_Read();
+void check_POTCAR_New_Free();
+void check_POTCAR_Set_Get(); 
+void check_File_Count_POTCAR();
+void check_POTCAR_Array_New_Free();
+
 /*outcar.c*/
 void check_OUTCAR_Read();
 

@@ -1,25 +1,27 @@
-/**
- * @brief Handle POTCAR file
- * @author Zhi-Quan Huang
- * @date 2012-05-01
- */
 #ifndef _POTCAR_H_
 #define _POTCAR_H_
 
+#include "hash.h"
 #include <stdio.h>
+
+
+extern int potcar_lineno; /* from lexer */
+extern FILE *potcar_in;
+extern int potcar_parse();
+extern int potcar_lex();
 
 typedef struct
 {
-    double zval;  /*Numbers of valence electron*/
-    double rwigs; /*Wigner-Sieitz radius (A)*/ 
-    double enmax; /*Max of energy*/
-    double enmin; /*Min of energy*/
+    HASH* table;
 } POTCAR;
 
-void _POTCAR_Init(POTCAR** ppot);
-void _POTCAR_Free(POTCAR** ppot);
-int _POTCAR_Read(POTCAR** ppot, FILE* pf);
-#define POTCAR_Init(x) _POTCAR_Init(&x)
-#define POTCAR_Free(x) _POTCAR_Free(&x)
-#define POTCAR_Read(x,y) _POTCAR_Read(&x,y)
+POTCAR* POTCAR_New();
+void POTCAR_Free(POTCAR* pot);
+
+void* POTCAR_Set(POTCAR* pot, char* key, void* value);
+void* POTCAR_Get(POTCAR *pot, char *key);
+int File_Count_POTCAR(FILE* pf);
+
+POTCAR** POTCAR_New_Array_From_File( FILE* pf, int* npot);
+void POTCAR_Free_Array(POTCAR** pot_array, int npos);
 #endif

@@ -1,131 +1,117 @@
 #include "potcar.h"
-#include "list.h"
+#include "hash.h"
 #include "line.h"
+#include "hash.h"
+#include "list.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdarg.h>
 
 #define STRING_LEN 1024
+#define POTCAR_TABLE_SIZE 150
 
-void _POTCAR_Init(POTCAR** ppot)
+POTCAR* POTCAR_New()
 {
-    if ((*ppot)!=NULL)
-        return;
-    else
-        _POTCAR_Free(ppot); 
+    POTCAR* pot=malloc(sizeof(POTCAR));
+    if (pot==NULL)
+    {
+        fprintf(stderr, "Memory Allocate Error.");
+        exit(1);
+    }
+    fold_set(3,POTCAR_TABLE_SIZE);
+    pot->table= HASH_New(POTCAR_TABLE_SIZE, fold, equal_str);
+    return pot;
 }
 
-void _POTCAR_Free(POTCAR** ppot)
+void POTCAR_Free(POTCAR* pot)
 {
-    /*Argument*/
-    if (*ppot==NULL) return;
-    free(*ppot);
-    *ppot=NULL;
+    if (pot==NULL) return;
+    HASH_Free(pot->table);
+    free(pot);
 }
 
-int _POTCAR_Read(POTCAR** ppot, FILE* pf)
+void* POTCAR_Set(POTCAR* pot,     
+                 char* key, void* value)
 {
-    /* Temp Variable */
-    int i;
+    void* ret= HASH_Set(pot->table, key, value);
+    return ret;
+}
+
+void* POTCAR_Get(POTCAR *pot, char *key)
+{
+    KEY_VALUE *key_value= HASH_Lookup(pot->table, key);
+    return key_value->value;
+}
+
+int File_Count_POTCAR(FILE* pf)
+{
+    int count=0;
+    fpos_t position;
+
+    if (pf==NULL) return count;
+    fgetpos(pf,&position);
+
     char cdump[STRING_LEN];
-    char tag[2][STRING_LEN];
-    double val[2];
-
-    int nlist=0;
-    int nlist_zval=0;
-    int nlist_rwigs=0;
-    int nlist_enmax=0;
-    int nlist_enmin=0;
-    LIST* node=NULL;
-    LIST* list_zval=NULL;
-    LIST* list_rwigs=NULL;
-    LIST* list_enmax=NULL;
-    LIST* list_enmin=NULL;
-
-    LIST_Init(list_zval);
-    LIST_Init(list_rwigs);
-    LIST_Init(list_enmax);
-    LIST_Init(list_enmin);
+    char tag[STRING_LEN];
 
     while(readline(cdump,STRING_LEN,pf))
     {
-        sscanf(cdump, "%10s%*1s%9lf%*1s%8s%*1s%9lf",tag[0],&val[0],tag[1],&val[1]);
-
-        if (strcmp(tag[0],"ENMAX")==0)
-        {
-            LIST_Append(list_enmax, &(val[0]), sizeof(val[0])); 
-            nlist_enmax++;
-        }
-
-
-        if (strcmp(tag[1],"ZVAL")==0)
-        {
-            LIST_Append(list_zval, &(val[1]), sizeof(val[1])); 
-            nlist_zval++;
-        } 
-        else if (strcmp(tag[1],"RWIGS")==0)
-        {
-            LIST_Append(list_rwigs, &(val[1]), sizeof(val[1])); 
-            nlist_rwigs++;
-        }
-        else if (strcmp(tag[1],"ENMIN")==0)
-        {
-            LIST_Append(list_enmin, &(val[1]), sizeof(val[1])); 
-            nlist_enmin++;
-
-        }
+        sscanf(cdump, "%10s",tag);
+        if (strcmp(tag,"TITEL")==0) count++;
     }
+
+    fsetpos(pf,&position);
+    return count;
+}
+
+POTCAR** POTCAR_New_Array_From_File( FILE* pf, int* npot)
+{
+    int i;
+    POTCAR** pot_array;
+
+    *npot= File_Count_POTCAR(pf);
+
+    pot_array= malloc(sizeof(POTCAR*)*(*npot));
+    if (pot_array==NULL)
+    {
+        fprintf(stderr, "Memory Allocate Error!");
+        exit(1);
+    }
+
+    for (i=0; i<(*npot); i++)
+        pot_array[i]= POTCAR_New(); 
+
+    if (pf==stdin)
+    {
+        potcar_parse(pot_array, *npot);
+    }
+    else
+    {
+        potcar_in= pf;
+        potcar_parse(pot_array, *npot);
+    }
+
+
+    return pot_array;
+}
+
+void POTCAR_Free_Array(POTCAR** pot_array, int npos)
+{
+    int i;
+    for ( i=0; i<npos; i++)
+    {
+        POTCAR_Free(pot_array[i]);
+    } 
+    free(pot_array);
+}
+
+void potcar_error(char *s, ...)
+{
+    va_list ap;
+    va_start(ap, s);
     
-    /* Check Parsing*/
-    if (  (nlist_zval!=nlist_rwigs) 
-        ||(nlist_rwigs!=nlist_enmax)
-        ||(nlist_enmax!=nlist_enmin))
-    {
-        fprintf(stderr,"Parsing Missing\n\n");
-
-        fprintf(stderr,"N of ZVAL = %3d\n", nlist_zval);
-        fprintf(stderr,"N of RWIGS= %3d\n", nlist_rwigs);
-        fprintf(stderr,"N of ENMIN= %3d\n", nlist_enmax);
-        fprintf(stderr,"N of ENMAX= %3d\n", nlist_enmin);
-
-        exit(1);
-    }
-    else
-    {
-        nlist= nlist_zval;
-    }
-
-    *ppot=malloc(sizeof(POTCAR)*nlist);
-    if (ppot==NULL)
-    {
-        fprintf(stderr, "POTCAR_Read: Memory Allocate for ppot error.");
-        exit(1);
-    }
-    else
-    {
-        for (i=0; i<nlist; i++)
-        {
-            node= LIST_Item(list_zval,i);
-            (*ppot)[i].zval= *((double*)(node->val));
-
-            node= LIST_Item(list_rwigs,i);
-            (*ppot)[i].rwigs= *((double*)(node->val));
-
-            node= LIST_Item(list_enmax,i);
-            (*ppot)[i].enmax= *((double*)(node->val));
-
-            node= LIST_Item(list_enmin,i);
-            (*ppot)[i].enmin= *((double*)(node->val));
-        }
-    }
-
-
-    /*Memory Allocate POTCAR*/
-
-    LIST_Free(list_zval);
-    LIST_Free(list_rwigs);
-    LIST_Free(list_enmax);
-    LIST_Free(list_enmin);
-
-    return nlist;
+    fprintf(stderr, "%d: error: ", potcar_lineno);
+    vfprintf(stderr, s, ap);
+    fprintf(stderr, "\n");
 }
