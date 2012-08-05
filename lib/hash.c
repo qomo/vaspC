@@ -137,13 +137,8 @@ int base36(char* text)
             num+=(c-48)*((int)(ipow(36,i)));          
         else if (isalpha(c))
             num+=(c-87)*((int)(ipow(36,i)));
-        else if (c=='_')
-            num+=37*    ((int)(ipow(36,i)));
         else
-        {
-            fprintf(stderr, "base36: string %s, character %d is out of range.",text,j);
-            exit(1);
-        } 
+        {}
     }
     return num;
 }
