@@ -91,10 +91,12 @@ KEY_VALUE* HASH_Lookup(HASH* hash, char* key)
         {
            return key_value; 
         }
-        if (++key_value>=(hash->table+address)) key_value=hash->table;
+        if (++key_value>=(hash->table+hash->size))
+            key_value=hash->table;
     }
 
-    fprintf(stderr, "Out of hash table");
+    fprintf(stderr, "key=%s\n",key);
+    fprintf(stderr, "Out of hash table\n");
     exit(1);
 }
 
@@ -135,6 +137,8 @@ int base36(char* text)
             num+=(c-48)*((int)(ipow(36,i)));          
         else if (isalpha(c))
             num+=(c-87)*((int)(ipow(36,i)));
+        else if (c=='_')
+            num+=37*    ((int)(ipow(36,i)));
         else
         {
             fprintf(stderr, "base36: string %s, character %d is out of range.",text,j);
