@@ -27,6 +27,7 @@
 #include "outcar.h"
 #include "field.h"
 #include "incar.h"
+#include "keyword.h"
 
 /*Surface*/
 #include "vacuum.h"

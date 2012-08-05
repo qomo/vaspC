@@ -1,0 +1,588 @@
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/acfdt.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/aedens.F
+      LAECHG =         BOOL
+     ENCUTAE =        FLOAT
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/asa.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/base.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/brent.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/broyden.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/bse.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/bse_te.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/chain.F
+   VCAIMAGES =        FLOAT
+      SPRING =        FLOAT
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/charge.F
+  GGA_COMPAT =         BOOL
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/chgloc.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/chi_base.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/chi.F
+        ALGO =          STR
+      NOMEGA =          INT
+    LHARTREE =         BOOL
+        LRPA =         BOOL
+      LADDER =         BOOL
+      LRSRPA =         BOOL
+        IBSE =          INT
+       LTCTE =         BOOL
+       LTETE =         BOOL
+     LFXCEPS =         BOOL
+     L2ORDER =         BOOL
+     ANTIRES =          INT
+     NOMEGAR =          INT
+    NBANDSGW =          INT
+ NBANDSGWLOW =          INT
+    NBANDSLF =          INT
+     NBANDSO =          INT
+     NBANDSV =          INT
+       LGWLF =         BOOL
+       LUSEW =         BOOL
+    OMEGAMAX =        FLOAT
+     OMEGATL =        FLOAT
+     OPTEMAX =        FLOAT
+   OMEGAGRID =          INT
+      CSHIFT =        FLOAT
+  SELFENERGY =         BOOL
+   ODDONLYGW =         BOOL
+  EVENONLYGW =         BOOL
+   LSPECTRAL =         BOOL
+     ENCUTGW =        FLOAT
+   TELESCOPE =          INT
+ ENCUTGWSOFT =        FLOAT
+     ENCUTLF =        FLOAT
+     SCISSOR =        FLOAT
+      MAXMEM =          INT
+        NELM =          INT
+         DIM =          INT
+     NKREDLF =          INT
+    NKREDLFX =          INT
+    NKREDLFY =          INT
+    NKREDLFZ =          INT
+     LMAXMP2 =          INT
+    HFSCREEN =        FLOAT
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/choleski2.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/cl_shift.F
+  ICORELEVEL =          INT
+        CLNT =          INT
+         CLN =          INT
+         CLL =          INT
+         CLZ =        FLOAT
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/constant.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/constr_cell_relax.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/constrmag.F
+I_CONSTRAINED_M =          INT
+    M_CONSTR =   FLOAT_LIST
+    M_CONSTR =   FLOAT_LIST
+      LAMBDA =        FLOAT
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/core_rel.F
+     LRELCOR =         BOOL
+     LRCTYPE =    BOOL_LIST
+     LRELCOR =         BOOL
+    LMIMICFC =         BOOL
+    LMATCHRW =         BOOL
+       RADEQ =          STR
+       RCREP =          INT
+       RCNDL =          INT
+      RCSTRD =          INT
+       RCMIX =        FLOAT
+   ESEMICORE =        FLOAT
+  LADAPTELIN =         BOOL
+LONLYSEMICORE =         BOOL
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/david_inner.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/davidson.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/dfast.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/dgemmtest.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/dimer_heyden.F
+      SWITCH =          INT
+     findiff =          INT
+  DIMER_DIST =        FLOAT
+   STEP_SIZE =        FLOAT
+    STEP_MAX =        FLOAT
+      MINROT =        FLOAT
+      ENGINE =          INT
+   RESTARTCG =          INT
+FLETCHER_REEVES =         BOOL
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/dipol.F
+      LDIPOL =         BOOL
+       LMONO =         BOOL
+      IDIPOL =          INT
+     EPSILON =        FLOAT
+       DIPOL =   FLOAT_LIST
+      EFIELD =        FLOAT
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/dmft.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/dos.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/dvvtrajectory.F
+ DVVEHISTORY =          INT
+   DVVDELTA0 =        FLOAT
+   DVVVNORM0 =        FLOAT
+ DVVMINPOTIM =        FLOAT
+ DVVMAXPOTIM =        FLOAT
+    DVVMINUS =         BOOL
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/dyna.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/dynbr.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/dynconstr.F
+  THERMOSTAT =          INT
+      MDALGO =          INT
+     NSUBSYS =     INT_LIST
+     PSUBSYS =   FLOAT_LIST
+     TSUBSYS =   FLOAT_LIST
+ANDERSEN_PROB =        FLOAT
+     SCALING =          INT
+    SHAKETOL =   FLOAT_LIST
+    SHAKESCA =   FLOAT_LIST
+SHAKEMAXITER =     INT_LIST
+    LBLUEOUT =         BOOL
+ EQUI_REGIME =          INT
+      INCREM =   FLOAT_LIST
+   VALUE_MIN =   FLOAT_LIST
+   VALUE_MAX =   FLOAT_LIST
+       AMASS =        FLOAT
+   HILLS_BIN =          INT
+HILLS_MAXSTRIDE =          INT
+HILLS_STRIDE =        FLOAT
+     HILLS_H =        FLOAT
+     HILLS_W =        FLOAT
+HILLS_VARIABLE_W =         BOOL
+     HILLS_K =   FLOAT_LIST
+     HILLS_M =   FLOAT_LIST
+HILLS_TEMPERATURE =        FLOAT
+HILLS_POSITION =   FLOAT_LIST
+HILLS_VELOCITY =   FLOAT_LIST
+HILLS_ANDERSEN_PROB =        FLOAT
+   HILLS_SQQ =        FLOAT
+HILLS_WALL_LOWER =   FLOAT_LIST
+HILLS_WALL_UPPER =   FLOAT_LIST
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/ebs.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/edtest.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/egrad.F
+        LEFG =         BOOL
+    QUAD_EFG =   FLOAT_LIST
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/electron_all.F
+      LABORT =         BOOL
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/electron.F
+      LABORT =         BOOL
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/electron_lhf.F
+      LABORT =         BOOL
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/electron_OEP.F
+      LABORT =         BOOL
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/elf.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/elinear_response.F
+    LEPSILON =         BOOL
+       EDIFF =        FLOAT
+        LRPA =         BOOL
+      LNABLA =         BOOL
+        LVEL =         BOOL
+  LINTERFAST =         BOOL
+      KINTER =          INT
+      CSHIFT =        FLOAT
+    OMEGAMAX =        FLOAT
+       RTIME =        FLOAT
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/elpol.F
+      LBERRY =         BOOL
+       IGPAR =          INT
+      NPPSTR =          INT
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/fast_aug.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/fft3dcray.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/fft3dessl.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/fft3dessl+furth.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/fft3dfujitsu.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/fft3dfurth.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/fft3dfurth_f77.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/fft3dlib.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/fft3dlib_f77.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/fft3dnec.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/fft3dsimple.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/fftmpi.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/fftmpi_map.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/fftmpiw.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/ffttest.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/fftw3d.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/fftw3d+furth.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/fileio.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/finite_diff.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/fock.F
+     LHFCALC =         BOOL
+      EXXOEP =          INT
+      LHFONE =         BOOL
+      LRSCOR =         BOOL
+    LRHFCALC =         BOOL
+    LMODELHF =         BOOL
+     LTHOMAS =         BOOL
+   FOURORBIT =          INT
+     ENCUT4O =        FLOAT
+         GGA =          STR
+     VOSKOWN =          INT
+      PARAM1 =        FLOAT
+      PARAM2 =        FLOAT
+      PARAM3 =        FLOAT
+    LUSE_VDW =         BOOL
+     Zab_VDW =        FLOAT
+    MODEL_GW =          INT
+  MODEL_EPS0 =        FLOAT
+ MODEL_ALPHA =        FLOAT
+       NKRED =          INT
+      NKREDX =          INT
+      NKREDY =          INT
+      NKREDZ =          INT
+    SHIFTRED =         BOOL
+    HFKIDENT =         BOOL
+     ODDONLY =         BOOL
+    EVENONLY =         BOOL
+        ISIF =          INT
+        ISYM =          INT
+        AMIX =        FLOAT
+    AMIX_MAG =        FLOAT
+        BMIX =        FLOAT
+    BMIX_MAG =        FLOAT
+       LVTOT =         BOOL
+        IMIX =          INT
+      HFLMAX =          INT
+    LMAXFOCK =          INT
+  LMAXFOCKAE =          INT
+  QMAXFOCKAE =   FLOAT_LIST
+  NMAXFOCKAE =          INT
+  LFOCKAEDFT =         BOOL
+     HFALPHA =   FLOAT_LIST
+    HFSCREEN =        FLOAT
+   HFSCREENC =        FLOAT
+      HFRCUT =        FLOAT
+        AEXX =        FLOAT
+       AGGAX =        FLOAT
+       ALDAX =        FLOAT
+   ENCUTFOCK =        FLOAT
+    PRECFOCK =          STR
+        AEXX =        FLOAT
+       AGGAC =        FLOAT
+       ALDAC =        FLOAT
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/force.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/ftflop.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/gadget.F
+       RELAX =          INT
+     HESSIAN =          INT
+     HUPDATE =          INT
+    HREFRESH =          INT
+   OPTENGINE =          INT
+     STEPLIM =        FLOAT
+     ECRITER =        FLOAT
+     GCRITER =        FLOAT
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/gridq.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/gw_model.F
+       AVGAP =        FLOAT
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/hamil.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/hamil_high.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/hamil_lr.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/hamil_lrf.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/hamil_rot.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/hessian.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/ilinear_response.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/ini.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/internals.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/jacobi.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/lattice.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/lattlib.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/LDApU.F
+        LDAU =         BOOL
+    LDAUTYPE =          INT
+       LDAUL =     INT_LIST
+       LDAUU =   FLOAT_LIST
+       LDAUJ =   FLOAT_LIST
+   LDAUPRINT =          INT
+     LORBMOM =         BOOL
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/Lebedev-Laikov.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/linear_optics.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/linear_response.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/linear_response_NMR.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/local_field.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/lr_helper.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/main.F
+ RANDOM_SEED =     INT_LIST
+   SMEARINGS =   FLOAT_LIST
+       FERWE =   FLOAT_LIST
+       FERDO =   FLOAT_LIST
+       LSTOP =         BOOL
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/main_mpi.F
+   VCAIMAGES =        FLOAT
+      IMAGES =          INT
+     KIMAGES =          INT
+   FOURORBIT =          INT
+        NPAR =          INT
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/makeparam.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/metagga.F
+     METAGGA =          STR
+        CMBJ =   FLOAT_LIST
+       CMBJA =   FLOAT_LIST
+       CMBJB =   FLOAT_LIST
+       LASPH =         BOOL
+     LMAXTAU =          INT
+     LMIXTAU =         BOOL
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/mgrid.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/mix.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/mkpoints_change.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/mkpoints.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/mkpoints_full.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/mlwf.F
+  LWRITE_UNK =         BOOL
+LWRITE_MMN_AMN =         BOOL
+   LREAD_AMN =         BOOL
+    num_wann =          INT
+use_bloch_phases =         BOOL
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/mp2.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/mpi.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/music.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/mymath.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/nmr.F
+     MAGATOM =          INT
+       JATOM =          INT
+    MAGDIPOL =   FLOAT_LIST
+   AVECCONST =   FLOAT_LIST
+  ORBITALMAG =         BOOL
+     LCHIMAG =         BOOL
+          DQ =        FLOAT
+    ICHIBARE =          INT
+     LWRTCUR =         BOOL
+LNMR_SYM_RED =         BOOL
+   LMAGBLOCH =         BOOL
+      LGAUGE =         BOOL
+    LBFCONST =         BOOL
+      BCONST =   FLOAT_LIST
+      NUCIND =         BOOL
+    LNICSALL =         BOOL
+      MAGPOS =   FLOAT_LIST
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/nonl.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/nonl_high.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/nonlr.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/opergrid.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/optengines.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/optics.F
+       NKOPT =          INT
+    NKOFFOPT =          INT
+    NBVALOPT =          INT
+    NBCONOPT =          INT
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/optreal.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/paircorrection.F
+     PAIRPOT =   FLOAT_LIST
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/pardens.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/paw_base.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/paw.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/pawfock.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/pawlhf.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/pawsym.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/pead.F
+       LPEAD =         BOOL
+    LCALCPOL =         BOOL
+ EFIELD_PEAD =   FLOAT_LIST
+    LCALCEPS =         BOOL
+  LWANNIER90 =         BOOL
+LWANNIER90_RUN =         BOOL
+       IPEAD =          INT
+  SKIP_EDOTP =         BOOL
+        LRPA =         BOOL
+    SKIP_SCF =         BOOL
+       DIPOL =   FLOAT_LIST
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/poscar.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/potex1.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/potex2.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/pot.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/pseudo.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/pwlhf.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/radial.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/random.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/ratpol.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/reader.F
+      SYSTEM =          STR
+      ISTART =          INT
+       IDIOT =          INT
+        PREC =          STR
+       IALGO =          INT
+        ALGO =          STR
+        NRMM =          INT
+        NSIM =          INT
+       LDIAG =         BOOL
+     LSUBROT =         BOOL
+     ADDGRID =         BOOL
+     LSORBIT =         BOOL
+LNONCOLLINEAR =         BOOL
+       SAXIS =   FLOAT_LIST
+       ISPIN =          INT
+        IMIX =          INT
+      MAXMIX =          INT
+     MREMOVE =          INT
+        AMIX =        FLOAT
+        BMIX =        FLOAT
+    AMIX_MAG =        FLOAT
+        AMIN =        FLOAT
+    BMIX_MAG =        FLOAT
+          WC =        FLOAT
+      INIMIX =          INT
+      MIXPRE =          INT
+      ICHARG =          INT
+      INIWAV =          INT
+        NELM =          INT
+      NELMDL =          INT
+      NELMIN =          INT
+      IBRION =          INT
+       NFREE =          INT
+       EDIFF =        FLOAT
+      EDIFFG =        FLOAT
+         NSW =          INT
+        ISIF =          INT
+      IWAVPR =          INT
+        ISYM =          INT
+     SYMPREC =        FLOAT
+      NBLOCK =          INT
+      KBLOCK =          INT
+       ENMAX =        FLOAT
+       ENCUT =        FLOAT
+       ENINI =        FLOAT
+       ENAUG =        FLOAT
+         NGX =          INT
+         NGY =          INT
+         NGZ =          INT
+        NGXF =          INT
+        NGYF =          INT
+        NGZF =          INT
+      NBANDS =          INT
+       POTIM =        FLOAT
+       TEBEG =        FLOAT
+       TEEND =        FLOAT
+       NPACO =          INT
+       APACO =        FLOAT
+       NEDOS =          INT
+        NBLK =          INT
+       SMASS =        FLOAT
+      SCALEE =        FLOAT
+      POMASS =   FLOAT_LIST
+       RWIGS =   FLOAT_LIST
+         VCA =   FLOAT_LIST
+     LVCADER =         BOOL
+     DARWINR =   FLOAT_LIST
+     DARWINV =   FLOAT_LIST
+     NUPDOWN =        FLOAT
+      MAGMOM =   FLOAT_LIST
+      NELECT =        FLOAT
+       LREAL =         BOOL
+       LREAL =          STR
+        ROPT =   FLOAT_LIST
+      LPLANE =         BOOL
+     LCOMPAT =         BOOL
+        TIME =        FLOAT
+        EMIN =        FLOAT
+        EMAX =        FLOAT
+        EREF =        FLOAT
+      EFERMI =        FLOAT
+         STM =   FLOAT_LIST
+      ISMEAR =          INT
+       SIGMA =        FLOAT
+    KSPACING =        FLOAT
+      KGAMMA =         BOOL
+      WEIMIN =        FLOAT
+      EBREAK =        FLOAT
+       DEPER =        FLOAT
+      NWRITE =          INT
+       LCORR =         BOOL
+     PSTRESS =        FLOAT
+     LMAXPAW =          INT
+     LMAXMIX =          INT
+      LMUSIC =         BOOL
+       LWAVE =         BOOL
+      LCHARG =         BOOL
+       LPARD =         BOOL
+       LVTOT =         BOOL
+       LVHAR =         BOOL
+      LORBIT =         BOOL
+      LORBIT =          INT
+        LELF =         BOOL
+     LOPTICS =         BOOL
+  LSCALAPACK =         BOOL
+      LSCALU =         BOOL
+   LSCAAWARE =         BOOL
+      LASYNC =         BOOL
+       LASPH =         BOOL
+LORBITALREAL =         BOOL
+    LMETAGGA =         BOOL
+     LSPIRAL =         BOOL
+     QSPIRAL =   FLOAT_LIST
+      LZEROZ =         BOOL
+ INTERACTIVE =         BOOL
+       TURBO =          INT
+    IRESTART =          INT
+     NREBOOT =          INT
+        NMIN =          INT
+    NLSPLINE =         BOOL
+        WSOC =        FLOAT
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/relativistic.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/rhfatm.F
+     LRHFATM =         BOOL
+    MAXPWAMP =        FLOAT
+     LRELCOR =         BOOL
+     LRCTYPE =    BOOL_LIST
+    RCRHOCUT =   FLOAT_LIST
+  LADAPTELIN =         BOOL
+   ESEMICORE =        FLOAT
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/rmm-diis.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/rmm-diis_lr.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/rmm-diis_mlr.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/rot.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/scala.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/screened_2e.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/setex.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/setlocalpp.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/shm.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/smart_allocate.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/sphpro.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/steep.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/step.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/stepprecor.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/stepver.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/stm.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/stockholder.F
+     LCHGFIT =         BOOL
+       ENCHG =        FLOAT
+       NGAUS =          INT
+         ZCT =   FLOAT_LIST
+       RGAUS =   FLOAT_LIST
+LSTOCKHOLDER =         BOOL
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/stufak.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/subrot_cluster.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/subrot.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/subrot_lr.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/subrot_scf.F
+ENCUTSUBROTSCF =        FLOAT
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/sydmat.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/sym_grad.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/symlib.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/symmetry.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/tet.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/tetweight.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/tutor.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/twoelectron4o.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/ump2.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/us.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/vdwforcefield.F
+        LVDW =         BOOL
+  VDW_RADIUS =        FLOAT
+ VDW_SCALING =        FLOAT
+       VDW_D =        FLOAT
+      VDW_C6 =   FLOAT_LIST
+      VDW_R0 =   FLOAT_LIST
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/vdw_nl.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/wannier.F
+    LWANNIER =         BOOL
+    LOCALIZE =         BOOL
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/wave_cacher.F
+     LKOTANI =         BOOL
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/wave.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/wave_high.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/wave_mpi.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/wavpre.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/wavpre_noio.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/wpot.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/writer.F
+L_WR_MOMENTS =         BOOL
+L_WR_DENSITY =         BOOL
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/xcgrad.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/xclib.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/xclib_grad.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/xcspin.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/xml.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/xml_writer.F
+#/home/huang/Code/vasp/vasp.5.2.12/mvapich.vdW.intel_11/zgemmtest.F
