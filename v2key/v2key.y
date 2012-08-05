@@ -17,31 +17,31 @@ stmt:
         char* count= $4;
         if (strcmp(type,"L")==0&&strcmp(count,"1")==0)
         {
-            printf("%12s %12s\n", key, "BOOL");
+            printf("%12s = %12s\n", key, "BOOL");
         }
         else if (strcmp(type,"L")==0&&strcmp(count,"1")!=0)
         {
-            printf("%12s %12s\n", key, "BOOL_LIST");
+            printf("%12s = %12s\n", key, "BOOL_LIST");
         }
         else if (strcmp(type,"I")==0&&strcmp(count,"1")==0)
         {
-            printf("%12s %12s\n", key, "INT");
+            printf("%12s = %12s\n", key, "INT");
         }
         else if (strcmp(type,"I")==0&&strcmp(count,"1")!=0)
         {
-            printf("%12s %12s\n", key, "INT_LIST");
+            printf("%12s = %12s\n", key, "INT_LIST");
         }
         else if (strcmp(type,"F")==0&&strcmp(count,"1")==0)
         {
-            printf("%12s %12s\n", key, "FLOAT");
+            printf("%12s = %12s\n", key, "FLOAT");
         }
         else if (strcmp(type,"F")==0&&strcmp(count,"1")!=0)
         {
-            printf("%12s %12s\n", key, "FLOAT_LIST");
+            printf("%12s = %12s\n", key, "FLOAT_LIST");
         }
         else if (strcmp(type,"S")==0)
         {
-            printf("%12s %12s\n", key, "STR");
+            printf("%12s = %12s\n", key, "STR");
         }
         else
         {
