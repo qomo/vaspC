@@ -74,8 +74,12 @@ void check_POTCAR_Array_New_Free();
 void check_OUTCAR_Read();
 
 /*incar.c*/
+void check_KEYWORD_New_Free();
+void check_KEYWORD_Set_Get();
+void check_KEYWORD_Read();
+void check_INCAR_New_Free();
+void check_INCAR_Set_Get();
 void check_INCAR_Read();
-void check_INCAR_Set();
 
 /*hash.c*/
 void check_base36();

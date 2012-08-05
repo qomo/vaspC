@@ -1,6 +1,6 @@
 ## Date: 2012-05-31
 
-#SYSTEM =               
+SYSTEM =  TEST                          
 ISTART  = 0             ## Start job: 0-new 1-cont 2-samecut
 ISPIN   = 1             
 
@@ -89,7 +89,7 @@ SIGMA   = 0.001         ## Default: 0.2
 
 ################ Projection  ##################
 ##PROCAR I/O
-#RWIGS  =               
+RWIGS  = .01 2E-1 3 -40. -5E3 -60000.00
 #LORBIT =               ## 10 DOSCAR and PROCAR file
                          ## 11 DOSCAR and lm decomposed PROCAR file
 
@@ -133,3 +133,5 @@ LSCALU  = F
 NSIM    = 4             
 NPAR    = 1             
 ##################################################
+NSUBSYS= 1 2 3 4 5
+LRCTYPE= T F F F T

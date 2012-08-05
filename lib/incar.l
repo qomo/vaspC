@@ -1,70 +1,147 @@
-/**********************************************************************
-  Copyright (c) 2012 Zhi-Quan Huang 
- 
-  Permission is hereby granted, free of charge, to any person obtaining 
-  a copy of this software and associated documentation files (the 
-  "Software"), to deal in the Software without restriction, including 
-  without limitation the rights to use, copy, modify, merge, publish, 
-  distribute, sublicense, and/or sell copies of the Software, and to 
-  permit persons to whom the Software is furnished to do so, subject to 
-  the following conditions:
- 
-  The above copyright notice and this permission notice shall be included 
-  in all copies or substantial portions of the Software.
- 
-  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
-  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
-  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
-  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
-  CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-  TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
-  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-**********************************************************************/
-
 %option prefix="incar_"
 %option outfile="incar.lex.c"
 %option noyywrap nodefault yylineno
-%x ARG
+%x ARG_BOOL1 ARG_INT1 ARG_FLOAT1 ARG_STR1 
+%x ARG_BOOL_LIST ARG_INT_LIST ARG_FLOAT_LIST
+%x SKIP
 
 %{
+#include "util.h"
 #include "incar.h"
 #include "incar.tab.h"
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#define YY_DECL int yylex( KEYWORD *keyword)
 %}
 
  /* float exponent */
 EXP ([Ee][-+]?[0-9]+)
 
 %%
-<INITIAL,ARG>";"|\n {BEGIN INITIAL; return EOL;}
-<INITIAL,ARG>[ \t]  {}
-<INITIAL,ARG>#.*\n  {BEGIN INITIAL; return EOL;}
 
-<INITIAL>[a-zA-Z0-9][a-zA-Z0-9]* {
-        unsigned int i;
-        incar_lval.s = malloc(sizeof(char)*(strlen(incar_text)+1));
-        strncpy(incar_lval.s, incar_text,strlen(incar_text));
-        incar_lval.s[strlen(incar_text)]='\0';
-        for (i=0; i<strlen(incar_text)+1; i++)
-        {
-            incar_lval.s[i]= toupper(incar_lval.s[i]);
-        }
-        return LABEL;
+ /*category*/
+
+<INITIAL>[a-zA-Z0-9]+[ \t]*= {
+    char* pch= strtok(incar_text, " \t=");
+    incar_lval.s= malloc(sizeof(char)*(strlen(pch)+1));
+    if (incar_lval.s==NULL)
+    {
+        fprintf(stderr,"Memory Allocate Error!");
+        exit(1);
     }
-<INITIAL>"=" {BEGIN ARG; return incar_text[0];}
+    strncpy(incar_lval.s,pch,strlen(pch));
+    incar_lval.s[strlen(pch)]='\0';
 
-<ARG>[Tt]{1}|"."(?i:TRUE)"."    {incar_lval.s= "T"; return BOOL;}
-<ARG>[Ff]{1}|"."(?i:FALSE)"."   {incar_lval.s= "F"; return BOOL;}
-<ARG>[-+]?[0-9]+{EXP}|[-+]?[0-9]+"."[0-9]*{EXP}?|[-+]?"."[0-9]+{EXP}? { incar_lval.s=incar_text; return FLOAT;}
-<ARG>[-+]?[0-9]+ { 
-        incar_lval.s = malloc(sizeof(char)*(strlen(incar_text)+1));
-        strncpy(incar_lval.s, incar_text,strlen(incar_text));
-        incar_lval.s[strlen(incar_text)]='\0';
-        return INT;
+    enum KEYWORD_TYPE* type= KEYWORD_Get(keyword, incar_lval.s); 
+    if (*type==TYPE_BOOL)
+    {
+        BEGIN ARG_BOOL1;
+        return  LABEL;
     }
-<ARG>[a-zA-Z0-9]+ { incar_lval.s= incar_text; return STR;}
+    else if (*type==TYPE_BOOL_LIST) 
+    {
+        BEGIN ARG_BOOL_LIST;
+        return  LABEL_LIST;
+    } 
+    else if (*type==TYPE_INT)
+    {
+        BEGIN ARG_INT1;
+        return  LABEL;
+    }
+    else if (*type==TYPE_INT_LIST)
+    {
+        BEGIN ARG_INT_LIST;
+        return  LABEL_LIST;
+    }
+    else if (*type==TYPE_FLOAT)
+    {
+        BEGIN ARG_FLOAT1;
+        return  LABEL;
+    }
+    else if (*type==TYPE_FLOAT_LIST)
+    {
+        BEGIN ARG_FLOAT_LIST;
+        return  LABEL_LIST;
+    }
+    else if (*type==TYPE_STR)
+    {
+        BEGIN ARG_STR1;
+        return  LABEL;
+    }
 
-<INITIAL,ARG>.      {incar_error("Mystery character %c\n", *incar_text);}
+}
+
+ /*BOOL*/
+<ARG_BOOL1>"T" {
+     incar_lval.b=true;
+     BEGIN SKIP;
+     return BOOL;
+}
+
+<ARG_BOOL1>"F" {
+     incar_lval.b=false;
+     BEGIN SKIP;
+     return BOOL;
+}
+
+ /*BOOL_LIST*/
+<ARG_BOOL_LIST>"T" {
+     incar_lval.b=true;
+     return BOOL;
+}
+
+<ARG_BOOL_LIST>"F" {
+     incar_lval.b=false;
+     return BOOL;
+}
+<ARG_BOOL_LIST>[^[:space:]#\n;] {BEGIN SKIP;}
+
+
+ /*INT*/
+<ARG_INT1>[0-9]+ {
+    incar_lval.i= atoi(incar_text);
+    BEGIN SKIP;
+    return INT;
+}
+
+ /*INT_LIST*/
+<ARG_INT_LIST>[0-9]+ {
+    incar_lval.i= atoi(incar_text);
+    return INT;
+}
+
+<ARG_INT_LIST>[^[:space:]#\n;] {BEGIN SKIP;}
+
+ /*FLOAT*/
+<ARG_FLOAT1>[-+]?[0-9]+{EXP}?|[-+]?[0-9]+"."[0-9]*{EXP}?|[-+]?"."[0-9]+{EXP}? {
+     incar_lval.d=atof(incar_text);
+     BEGIN SKIP;
+     return FLOAT;
+}
+
+ /*FLOAT_LIST*/
+<ARG_FLOAT_LIST>[-+]?[0-9]+{EXP}?|[-+]?[0-9]+"."[0-9]*{EXP}?|[-+]?"."[0-9]+{EXP}? {
+     incar_lval.d=atof(incar_text);
+     return FLOAT;
+}
+<ARG_FLOAT_LIST>[^[:space:]#\n;] {BEGIN SKIP;}
+
+ /*STR*/
+<ARG_STR1>[^#;\n=[:space:]][^#;\n=]+[^#;\n=[:space:]] {
+    incar_lval.s= malloc(sizeof(char)*(strlen(incar_text)+1));
+    if (incar_lval.s==NULL)
+    {
+        fprintf(stderr,"Memory Allocate Error!");
+        exit(1);
+    }
+    strncpy(incar_lval.s, incar_text, strlen(incar_text));
+    incar_lval.s[strlen(incar_text)]='\0';
+    BEGIN SKIP;
+    return STR;
+}
+
+<*>"#"   {BEGIN SKIP;}
+<*>[\n;] {BEGIN INITIAL; return EOL;}
+<*>. {}
 %%
