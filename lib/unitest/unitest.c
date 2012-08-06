@@ -64,6 +64,8 @@ int main(int argc, char** argv)
     g_test_add_func ("/POTCAR/Set_Get",      check_POTCAR_Set_Get);
     g_test_add_func ("/POTCAR/File_Count",   check_File_Count_POTCAR);
     g_test_add_func ("/POTCAR/Array_New_Free",check_POTCAR_Array_New_Free);
+    g_test_add_func ("/OUTCAR/New_Free"  ,   check_OUTCAR_New_Free);
+    g_test_add_func ("/OUTCAR/Set_Get"  ,    check_OUTCAR_Set_Get);
     g_test_add_func ("/OUTCAR/Read"  ,       check_OUTCAR_Read);
     g_test_add_func ("/KEYWORD/New_Free",    check_KEYWORD_New_Free);
     g_test_add_func ("/KEYWORD/Set_Get",    check_KEYWORD_Set_Get);

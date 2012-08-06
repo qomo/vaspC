@@ -71,6 +71,8 @@ void check_File_Count_POTCAR();
 void check_POTCAR_Array_New_Free();
 
 /*outcar.c*/
+void check_OUTCAR_New_Free();
+void check_OUTCAR_Set_Get();
 void check_OUTCAR_Read();
 
 /*incar.c*/

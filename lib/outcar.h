@@ -1,21 +1,23 @@
-/**
- * Date: 2012-05-08
- * Author: Zhi-Quan Huang
- */
 #ifndef _OUTCAR_H_
 #define _OUTCAR_H_
 
+#include "list.h"
+#include "hash.h"
 #include <stdio.h>
+
+extern int outcar_lineno; /* from lexer */
+extern FILE *outcar_in;
+extern int outcar_parse();
+extern int outcar_lex();
 
 typedef struct
 {
-    int nfermi;
-    double *fermi;
+    HASH* table; 
 } OUTCAR;
 
-void _OUTCAR_Init(OUTCAR** pout);
-void _OUTCAR_Free(OUTCAR** pout);
-#define OUTCAR_Init(x) _OUTCAR_Init(&(x))
-#define OUTCAR_Free(x) _OUTCAR_Free(&(x))
+OUTCAR* OUTCAR_New();
+void OUTCAR_Free(OUTCAR* out);
+void* OUTCAR_Set(OUTCAR* out, char* key, void* value);
+void* OUTCAR_Get(OUTCAR* out, char* key);
 void OUTCAR_Read(OUTCAR* out, FILE* pf);
 #endif 

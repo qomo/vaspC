@@ -4,7 +4,7 @@
 	MAKEFLAGS += -r
 CC=gcc
 
-vaspC.a: outcar.o potcar.o list.o lattice.o line.o element.o poscar.o vmath.o field.o gradient.o vacuum.o insort.o swap.o hash.o potcar.o potcar.tab.o potcar.lex.o util.o incar.o incar.tab.o incar.lex.o keyword.tab.o keyword.lex.o keyword.o
+vaspC.a: outcar.o potcar.o list.o lattice.o line.o element.o poscar.o vmath.o field.o gradient.o vacuum.o insort.o swap.o hash.o potcar.o potcar.tab.o potcar.lex.o util.o incar.o incar.tab.o incar.lex.o keyword.tab.o keyword.lex.o keyword.o outcar.tab.o outcar.lex.o outcar.o
 	ar rcs $@ $^	
 
 %.o: %.c
@@ -24,6 +24,11 @@ keyword.tab.o keyword.lex.o keyword.o: keyword.y keyword.l keyword.c
 	bison -d -W keyword.y
 	flex -o keyword.lex.c keyword.l
 	gcc -c -W keyword.lex.c keyword.c keyword.tab.c   
+
+outcar.tab.o outcar.lex.o outcar.o: outcar.y outcar.l outcar.c
+	bison -d -W outcar.y
+	flex -o outcar.lex.c outcar.l
+	gcc -c -W outcar.lex.c outcar.c outcar.tab.c   
 
 test: vaspC.a
 	cd unitest && make test

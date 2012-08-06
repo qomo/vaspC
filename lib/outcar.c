@@ -1,67 +1,64 @@
 #include "outcar.h"
-#include "line.h"
-#include "list.h"
-#include "util.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <stdarg.h>
 
-void _OUTCAR_Init(OUTCAR** pout)
+#define OUTCAR_TABLE_SIZE 500
+
+OUTCAR* OUTCAR_New()
 {
-    if ((*pout)!=NULL) _OUTCAR_Free(pout);
-    *pout=malloc(sizeof(OUTCAR));
-    if ((*pout)==NULL)
+    OUTCAR* out= malloc(sizeof(OUTCAR));
+    if (out==NULL)
     {
-        fprintf(stderr, "OUTCAR_Init: Memory Allocate Error.\n");
+        fprintf(stderr, "Memory Allocate Error!"); 
         exit(1);
-    }
-    (*pout)->nfermi=0;
-    (*pout)->fermi=NULL;
+    } 
+
+    fold_set(3,OUTCAR_TABLE_SIZE);
+    out->table= HASH_New(OUTCAR_TABLE_SIZE, fold, equal_str);
+
+    return out;
 }
 
-void _OUTCAR_Free(OUTCAR** pout)
+void OUTCAR_Free(OUTCAR* out)
 {
-    if ((*pout)==NULL) return;
-    if ((*pout)->fermi!=NULL) free((*pout)->fermi);
-    free(*pout);
-    *pout=NULL;
+    if (out==NULL) return;
+    HASH_Free(out->table);
+    free(out);
+}
+
+void* OUTCAR_Set(OUTCAR* out, char* key, void* value)
+{
+    void* ret= HASH_Set(out->table, key, value);
+    return ret;
+}
+
+void* OUTCAR_Get(OUTCAR* out, char* key)
+{
+    KEY_VALUE *key_value= HASH_Lookup(out->table, key);
+    return key_value->value;
 }
 
 void OUTCAR_Read(OUTCAR* out,FILE* pf)
 {
-    int i;
-    LIST* node;
-    LIST* list_fermi=NULL;
-    char cdump[1024];
-    char tag[1024];
-    double value;
-
-    LIST_Init(list_fermi);
-
-    while(readline(cdump, 1024, pf))
+    if (out==NULL||pf==NULL) return;
+    if (pf==stdin)
     {
-        sscanf(cdump,"%9s%*1s%9lf",tag,&value);
-        if (strcmp(tag,"E-fermi")!=0)
-            continue;        
-        else
-        {
-            LIST_Append(list_fermi,POINTER_MALLOC(&value,double,1));     
-            out->nfermi++;  
-        }
+        outcar_parse(out);  
     }
-
-    out->fermi= malloc(out->nfermi*sizeof(OUTCAR));
-    if (out->fermi ==NULL)
+    else
     {
-        fprintf(stderr, "OUTCAR_Read: Memory Allocate Error.");
-        exit(1);
+        outcar_in= pf;
+        outcar_parse(out);
     }
+}
 
-    for (i=0; i<out->nfermi; i++)
-    {
-        node= LIST_Item(list_fermi,i);
-        out->fermi[i]= *((double*)(node->val));
-    }
-
-    LIST_Free(list_fermi);
+void outcar_error(char *s, ...)
+{
+    va_list ap;
+    va_start(ap, s);
+    
+    fprintf(stderr, "%d: error: ", outcar_lineno);
+    vfprintf(stderr, s, ap);
+    fprintf(stderr, "\n");
 }
