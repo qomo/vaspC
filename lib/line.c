@@ -54,7 +54,7 @@ int nitems(const char* const str, const char* const delimiters)
     return ret;
 }
 
-char *lstrip(char* str)
+char *rstrip(char* str)
 {
     int i;
     const int str_len= strlen(str);

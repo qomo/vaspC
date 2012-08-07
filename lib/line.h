@@ -14,5 +14,5 @@
 #include <stdio.h>
 char* readline(char* str, int num, FILE* stream);
 int nitems(const char* str, const char* delimiters);
-char *lstrip(char* str);
+char *rstrip(char* str);
 #endif

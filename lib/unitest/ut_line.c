@@ -50,9 +50,9 @@ void check_nitems()
     g_assert(nitems(test_str,DELIMITERS)==5);
 }
 
-void check_lstrip()
+void check_rstrip()
 {
     char str[10]="\t  4567  ";
-    lstrip(str); 
+    rstrip(str); 
     g_assert_cmpstr(str,==,"\t  4567");
 }

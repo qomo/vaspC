@@ -9,7 +9,7 @@ void check_vmath_cross3D();
 /*line.c*/
 void check_readline();
 void check_nitems();
-void check_lstrip();
+void check_rstrip();
 
 /*element.c*/
 void check_element();
@@ -90,4 +90,9 @@ void check_fold();
 void check_hash_new_free();
 void check_hash_lookup();
 void check_hash_set_get();
+
+/*kpoints.c*/
+void check_KPOINTS_New_Free();
+void check_KPOINTS_File_Type();
+
 #endif

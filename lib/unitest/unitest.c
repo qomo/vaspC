@@ -13,7 +13,7 @@ int main(int argc, char** argv)
     g_test_init(&argc, &argv, NULL);
     g_test_add_func ("/line/readline",     check_readline);
     g_test_add_func ("/line/nitems",       check_nitems);
-    g_test_add_func ("/line/lstrip",       check_lstrip);
+    g_test_add_func ("/line/rstrip",       check_rstrip);
     g_test_add_func ("/element",           check_element);
     g_test_add_func ("/vmath/dot3D",       check_vmath_dot3D);
     g_test_add_func ("/vmath/cross3D",     check_vmath_cross3D);
@@ -73,5 +73,7 @@ int main(int argc, char** argv)
     g_test_add_func ("/INCAR/New_Free"  ,    check_INCAR_New_Free);
     g_test_add_func ("/INCAR/Set_Get"  ,     check_INCAR_Set_Get);
     g_test_add_func ("/INCAR/Read"  ,        check_INCAR_Read);
+    g_test_add_func ("/KPOINTS/New_Free"  ,  check_KPOINTS_New_Free);
+    g_test_add_func ("/KPOINTS/File_Type" ,  check_KPOINTS_File_Type);
     return g_test_run();
  }
