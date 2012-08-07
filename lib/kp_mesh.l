@@ -10,7 +10,6 @@
 #include "line.h"
 #include <stdlib.h>
 #include <ctype.h>
-static int count=0;
 %}
 
 EXP ([Ee][-+]?[0-9]+)
