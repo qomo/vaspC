@@ -190,7 +190,7 @@ int POSCAR_Read(POSCAR* pos,  FILE* pf)
     POSCAR_Init(pos);
     /*1st Line*/
     READLINE(iline, pos->comment, POSCAR_COMMENT_LEN, pf);
-    lstrip(pos->comment);
+    rstrip(pos->comment);
     /*2 Line*/
     READLINE(iline, cdump, POSCAR_COMMENT_LEN, pf);
     if(sscanf(cdump,"%lf",&pos->scale)!=1)
