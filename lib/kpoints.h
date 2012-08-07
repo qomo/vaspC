@@ -4,42 +4,60 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-enum
+enum KP_TYPE
 {
-    KP_UNKNOWN,
-    KP_GRID,
-    KP_MESH,
-    KP_LINE
+    TYPE_UNKOWN,
+    TYPE_GRID,
+    TYPE_MESH,
+    TYPE_LINE
 };
 
-typedef struct 
+typedef struct
 {
-    int type;
-    /*GRID*/  
-    char* comment; /*1st Line*/         
-    int ngrid;     /*2nd Line*/
-    bool isRev;    /*3rd Line*/
-    double (*pt)[3]; /* 4th~ Line (0-2 token)*/
-    double (*wt)[3];    /* 4th~ Line (  3 token)*/
-    /*MESH*/  
-    /*char* comment;*/   /* 1st Line */
-    /*int ngrid;*/       /* 2nd Line==0*/
+    enum KP_TYPE type;
+} KPOINTS;
+
+typedef struct
+{
+    enum KP_TYPE type;
+    char* comment;
+    int ngrid; 
+    bool isRec;
+    double(*pt)[3];
+    double(*wt)[3];
+} KPOINTS_GRID;
+
+typedef struct
+{
+    enum KP_TYPE type;
+    char* comment;
+    int ngrid;
+    bool isRec;
+    double (*pt)[3];
+    char** mark;
+} KPOINTS_LINE;
+
+typedef struct
+{
+    enum KP_TYPE type;
+    char* comment; /*1st Line*/
     bool isGamma;        /* 3rd Line */
     int nmesh[3];        /* 4rd Line */
     double shift[3];     /* 5rd Line */ 
-    /*LINE*/
-    /*char* comment;*//* 1st Line   */
-    /*int ngrid;*/    /* 2nd Line!=0*/
-                      /* 3rd Line[0]=='L'*/
-    /*bool isRev;*/   /* 4nd Line   */
-    /*double (*pt)[3];*//* 5th~ Line*/
-    char** mark;
-}KPOINTS;
+} KPOINTS_MESH;
 
-void _KPOINTS_Init(KPOINTS** pkp);
-#define KPOINTS_Init(x) _KPOINTS_Init(&(x))
-void _KPOINTS_Free(KPOINTS** pkp);
-#define KPOINTS_Free(x) _KPOINTS_Free(&(x))
-void KPOINTS_Read(KPOINTS* kp, FILE* pf);
+
+KPOINTS* KPOINTS_New();
+KPOINTS_GRID* KPOINTS_GRID_New();
+KPOINTS_MESH* KPOINTS_MESH_New();
+KPOINTS_LINE* KPOINTS_LINE_New();
+
+void KPOINTS_GRID_Free(KPOINTS_GRID* kp);
+void KPOINTS_MESH_Free(KPOINTS_MESH* kp);
+void KPOINTS_LINE_Free(KPOINTS_LINE* kp);
+void KPOINTS_Free(KPOINTS* kp);
+
+enum KP_TYPE KPOINTS_File_Type(FILE* pf);
+void KPOINTS_MESH_Read(KPOINTS_MESH* mesh, FILE* pf);
 
 #endif
