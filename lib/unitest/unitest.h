@@ -95,5 +95,6 @@ void check_hash_set_get();
 void check_KPOINTS_New_Free();
 void check_KPOINTS_File_Type();
 void check_KPOINTS_MESH_Read();
+void check_KPOINTS_LINE_Read();
 
 #endif

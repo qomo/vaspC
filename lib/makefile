@@ -4,7 +4,7 @@
 	MAKEFLAGS += -r
 CC=gcc
 
-vaspC.a: outcar.o potcar.o list.o lattice.o line.o element.o poscar.o vmath.o field.o gradient.o vacuum.o insort.o swap.o hash.o potcar.o potcar.tab.o potcar.lex.o util.o incar.o incar.tab.o incar.lex.o keyword.tab.o keyword.lex.o keyword.o outcar.tab.o outcar.lex.o outcar.o kpoints.o kp_mesh.tab.o kp_mesh.lex.o
+vaspC.a: outcar.o potcar.o list.o lattice.o line.o element.o poscar.o vmath.o field.o gradient.o vacuum.o insort.o swap.o hash.o potcar.o potcar.tab.o potcar.lex.o util.o incar.o incar.tab.o incar.lex.o keyword.tab.o keyword.lex.o keyword.o outcar.tab.o outcar.lex.o outcar.o kpoints.o kp_mesh.tab.o kp_mesh.lex.o kp_line.tab.o kp_line.lex.o
 	ar rcs $@ $^	
 
 %.o: %.c
@@ -34,6 +34,11 @@ kp_mesh.tab.o kp_mesh.lex.o : kp_mesh.y kp_mesh.l
 	bison -d -W kp_mesh.y
 	flex -o kp_mesh.lex.c kp_mesh.l
 	gcc -c -W kp_mesh.lex.c kp_mesh.tab.c   
+
+kp_line.tab.o kp_line.lex.o : kp_line.y kp_line.l
+	bison -d -W kp_line.y
+	flex -o kp_line.lex.c kp_line.l
+	gcc -c -W kp_line.lex.c kp_line.tab.c   
 
 test: vaspC.a
 	cd unitest && make test

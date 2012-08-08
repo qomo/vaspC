@@ -1,6 +1,8 @@
 #ifndef _KPOINTS_H_
 #define _KPOINTS_H_
 
+#include "list.h"
+#include "line.h"
 #include <stdbool.h>
 #include <stdio.h>
 
@@ -29,12 +31,19 @@ typedef struct
 
 typedef struct
 {
+    double start[3];  
+    double end[3];  
+    char start_tag[20];
+    char end_tag[20];
+} KP_SEG;
+
+typedef struct
+{
     enum KP_TYPE type;
     char* comment;
     int ngrid;
     bool isRec;
-    double (*pt)[3];
-    char** mark;
+    LIST* seg;
 } KPOINTS_LINE;
 
 typedef struct
@@ -45,7 +54,6 @@ typedef struct
     int nmesh[3];        /* 4rd Line */
     double shift[3];     /* 5rd Line */ 
 } KPOINTS_MESH;
-
 
 KPOINTS* KPOINTS_New();
 KPOINTS_GRID* KPOINTS_GRID_New();
@@ -59,5 +67,7 @@ void KPOINTS_Free(KPOINTS* kp);
 
 enum KP_TYPE KPOINTS_File_Type(FILE* pf);
 void KPOINTS_MESH_Read(KPOINTS_MESH* mesh, FILE* pf);
+void KPOINTS_LINE_Read(KPOINTS_LINE* line, FILE* pf);
+KP_SEG* KPOINTS_LINE_Get_Seg(KPOINTS_LINE* line, int i);
 
 #endif

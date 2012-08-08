@@ -1,6 +1,8 @@
 #include "kpoints.h"
 #include "kp_mesh.h"
+#include "kp_line.h"
 #include "line.h"
+#include "list.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -64,8 +66,8 @@ KPOINTS_LINE* KPOINTS_LINE_New()
     kp->comment= NULL;
     kp->ngrid  = 0;
     kp->isRec  = true; 
-    kp->pt     = NULL;
-    kp->mark   = NULL;
+    kp->seg    = NULL;
+    LIST_Init(kp->seg);
     return kp;
 }
 
@@ -105,15 +107,9 @@ void KPOINTS_MESH_Free(KPOINTS_MESH* kp)
 
 void KPOINTS_LINE_Free(KPOINTS_LINE* kp)
 {
-    int i;
     if (kp==NULL) return;
     if (kp->comment!=NULL) free(kp->comment);
-    if (kp->pt!=NULL) free(kp->pt);
-    for (i=0; i<kp->ngrid; i++)
-    {
-        if (kp->mark[i]!=NULL) free(kp->mark[i]);
-    }
-    free(kp->mark);
+    LIST_Free(kp->seg);
     free(kp);
 }
 
@@ -134,6 +130,7 @@ void KPOINTS_Free(KPOINTS* kp)
     }
 }
 
+/*Automatica detect*/
 enum KP_TYPE KPOINTS_File_Type(FILE* pf)
 {
     int line_count;  
@@ -166,6 +163,7 @@ enum KP_TYPE KPOINTS_File_Type(FILE* pf)
         return TYPE_GRID;
 }
 
+/*Read*/
 void KPOINTS_MESH_Read(KPOINTS_MESH* mesh, FILE* pf)
 {
     if (mesh==NULL||pf==NULL) return;
@@ -174,12 +172,37 @@ void KPOINTS_MESH_Read(KPOINTS_MESH* mesh, FILE* pf)
     kp_mesh_parse(mesh);
 }
 
+void KPOINTS_LINE_Read(KPOINTS_LINE* line, FILE* pf)
+{
+    if (line==NULL||pf==NULL) return;
+    
+    kp_line_in= pf;
+    kp_line_parse(line);
+}
+
+KP_SEG* KPOINTS_LINE_Get_Seg(KPOINTS_LINE* line, int i)
+{
+    KP_SEG* seg= LIST_Get(line->seg,i);
+    return seg;
+}
+
+/*error*/
 void kp_mesh_error(char *s, ...)
 {
     va_list ap;
     va_start(ap, s);
     
     fprintf(stderr, "%d: error: ", kp_mesh_lineno);
+    vfprintf(stderr, s, ap);
+    fprintf(stderr, "\n");
+}
+
+void kp_line_error(char *s, ...)
+{
+    va_list ap;
+    va_start(ap, s);
+    
+    fprintf(stderr, "%d: error: ", kp_line_lineno);
     vfprintf(stderr, s, ap);
     fprintf(stderr, "\n");
 }

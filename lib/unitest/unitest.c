@@ -76,5 +76,6 @@ int main(int argc, char** argv)
     g_test_add_func ("/KPOINTS/New_Free"  ,  check_KPOINTS_New_Free);
     g_test_add_func ("/KPOINTS/File_Type" ,  check_KPOINTS_File_Type);
     g_test_add_func ("/KPOINTS/MESH_Read" ,  check_KPOINTS_MESH_Read);
+    g_test_add_func ("/KPOINTS/LINE_Read" ,  check_KPOINTS_LINE_Read);
     return g_test_run();
  }

@@ -74,3 +74,64 @@ void check_KPOINTS_MESH_Read()
     fclose(pf);
     KPOINTS_MESH_Free(mesh);
 }
+
+void check_KPOINTS_LINE_Read()
+{
+    FILE* pf;
+   
+    pf=fopen("data/kpoints/KPOINTS_LINE","r");
+    g_assert(pf);
+
+    KPOINTS_LINE* line= NULL;
+    line= KPOINTS_LINE_New();
+
+    KPOINTS_LINE_Read(line, pf);
+
+    g_assert_cmpstr(line->comment, ==, "KMesh");
+    g_assert_cmpint(line->ngrid,==,20);
+    g_assert(line->isRec);
+
+    KP_SEG* seg= NULL;
+    seg= LIST_Get(line->seg, 0);
+    g_assert_cmpfloat(seg->start[0],==,0.5);    
+    g_assert_cmpfloat(seg->start[1],==,0.0);    
+    g_assert_cmpfloat(seg->start[2],==,0.0);    
+    g_assert_cmpstr (seg->start_tag,==,"L");    
+    g_assert_cmpfloat(seg->end[0],==,0.0);    
+    g_assert_cmpfloat(seg->end[1],==,0.0);    
+    g_assert_cmpfloat(seg->end[2],==,0.0);    
+    g_assert_cmpstr (seg->end_tag,==,"Gamma");    
+
+    seg= LIST_Get(line->seg, 1);
+    g_assert_cmpfloat(seg->start[0],==,0.0);    
+    g_assert_cmpfloat(seg->start[1],==,0.0);    
+    g_assert_cmpfloat(seg->start[2],==,0.0);    
+    g_assert_cmpstr (seg->start_tag,==,"Gamma");    
+    g_assert_cmpfloat(seg->end[0],==,0.5);    
+    g_assert_cmpfloat(seg->end[1],==,0.0);    
+    g_assert_cmpfloat(seg->end[2],==,0.5);    
+    g_assert_cmpstr (seg->end_tag,==,"X");    
+
+    seg= LIST_Get(line->seg, 2);
+    g_assert_cmpfloat(seg->start[0],==,0.5);    
+    g_assert_cmpfloat(seg->start[1],==,0.0);    
+    g_assert_cmpfloat(seg->start[2],==,0.5);    
+    g_assert_cmpstr (seg->start_tag,==,"X");    
+    g_assert_cmpfloat(seg->end[0],==,0.75);    
+    g_assert_cmpfloat(seg->end[1],==,0.375);    
+    g_assert_cmpfloat(seg->end[2],==,0.375);    
+    g_assert_cmpstr (seg->end_tag,==,"K");    
+
+    seg= LIST_Get(line->seg, 3);
+    g_assert_cmpfloat(seg->start[0],==,0.75);    
+    g_assert_cmpfloat(seg->start[1],==,0.375);    
+    g_assert_cmpfloat(seg->start[2],==,0.375);    
+    g_assert_cmpstr (seg->start_tag,==,"K");    
+    g_assert_cmpfloat(seg->end[0],==,0.0);    
+    g_assert_cmpfloat(seg->end[1],==,0.0);    
+    g_assert_cmpfloat(seg->end[2],==,0.0);    
+    g_assert_cmpstr (seg->end_tag,==,"Gamma");    
+
+    fclose(pf);
+    KPOINTS_LINE_Free(line);
+}
