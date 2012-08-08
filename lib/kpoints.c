@@ -1,6 +1,7 @@
 #include "kpoints.h"
 #include "kp_mesh.h"
 #include "kp_line.h"
+#include "kp_grid.h"
 #include "line.h"
 #include "list.h"
 #include <stdio.h>
@@ -24,9 +25,8 @@ KPOINTS_GRID* KPOINTS_GRID_New()
     kp->comment= NULL;
     kp->ngrid= 0;
     kp->isRec= true;
-    kp->pt= NULL;
-    kp->wt= NULL;
-
+    kp->grid=NULL;
+    LIST_Init(kp->grid);
     return kp;
 }
 
@@ -93,8 +93,7 @@ void KPOINTS_GRID_Free(KPOINTS_GRID* kp)
 {
     if (kp==NULL) return;
     if (kp->comment!=NULL) free(kp->comment);
-    if (kp->pt!=NULL) free(kp->pt);
-    if (kp->wt!=NULL) free(kp->wt);
+    LIST_Free(kp->grid);
     free(kp);
 }
 
@@ -180,11 +179,14 @@ void KPOINTS_LINE_Read(KPOINTS_LINE* line, FILE* pf)
     kp_line_parse(line);
 }
 
-KP_SEG* KPOINTS_LINE_Get_Seg(KPOINTS_LINE* line, int i)
+void KPOINTS_GRID_Read(KPOINTS_GRID* grid, FILE* pf)
 {
-    KP_SEG* seg= LIST_Get(line->seg,i);
-    return seg;
+    if (grid==NULL||pf==NULL) return;
+    
+    kp_grid_in= pf;
+    kp_grid_parse(grid);
 }
+
 
 /*error*/
 void kp_mesh_error(char *s, ...)
@@ -207,3 +209,12 @@ void kp_line_error(char *s, ...)
     fprintf(stderr, "\n");
 }
 
+void kp_grid_error(char *s, ...)
+{
+    va_list ap;
+    va_start(ap, s);
+    
+    fprintf(stderr, "%d: error: ", kp_grid_lineno);
+    vfprintf(stderr, s, ap);
+    fprintf(stderr, "\n");
+}

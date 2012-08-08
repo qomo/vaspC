@@ -21,12 +21,17 @@ typedef struct
 
 typedef struct
 {
+    double pt[3];
+    int wt;
+} KP_GRID;
+
+typedef struct
+{
     enum KP_TYPE type;
     char* comment;
     int ngrid; 
     bool isRec;
-    double(*pt)[3];
-    double(*wt)[3];
+    LIST* grid;
 } KPOINTS_GRID;
 
 typedef struct
@@ -68,6 +73,6 @@ void KPOINTS_Free(KPOINTS* kp);
 enum KP_TYPE KPOINTS_File_Type(FILE* pf);
 void KPOINTS_MESH_Read(KPOINTS_MESH* mesh, FILE* pf);
 void KPOINTS_LINE_Read(KPOINTS_LINE* line, FILE* pf);
-KP_SEG* KPOINTS_LINE_Get_Seg(KPOINTS_LINE* line, int i);
+void KPOINTS_GRID_Read(KPOINTS_GRID* grid, FILE* pf);
 
 #endif

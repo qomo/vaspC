@@ -91,6 +91,8 @@ void check_KPOINTS_LINE_Read()
     g_assert_cmpint(line->ngrid,==,20);
     g_assert(line->isRec);
 
+    g_assert_cmpint(LIST_NItem(line->seg),==,4);
+
     KP_SEG* seg= NULL;
     seg= LIST_Get(line->seg, 0);
     g_assert_cmpfloat(seg->start[0],==,0.5);    
@@ -135,3 +137,51 @@ void check_KPOINTS_LINE_Read()
     fclose(pf);
     KPOINTS_LINE_Free(line);
 }
+
+void check_KPOINTS_GRID_Read()
+{
+    FILE* pf;
+    pf=fopen("data/kpoints/KPOINTS_GRID","r");
+    g_assert(pf);
+
+    KPOINTS_GRID* grid= NULL;
+    grid= KPOINTS_GRID_New();
+
+    KPOINTS_GRID_Read(grid, pf);
+
+    g_assert_cmpstr(grid->comment,==,"Automatically generated mesh");
+    g_assert_cmpint(grid->ngrid,==,20);
+    g_assert(grid->isRec);
+
+    g_assert_cmpint(grid->ngrid,==,LIST_NItem(grid->grid));
+
+    /*grids*/
+    KP_GRID* g=NULL;
+    g= LIST_Get(grid->grid,0);
+    g_assert_cmpfloat(g->pt[0],==,0);
+    g_assert_cmpfloat(g->pt[1],==,0);
+    g_assert_cmpfloat(g->pt[2],==,0);
+    g_assert_cmpint  (g->wt   ,==,1);
+
+    g= LIST_Get(grid->grid,1);
+    g_assert_cmpfloat(g->pt[0],==,0.25);
+    g_assert_cmpfloat(g->pt[1],==,0);
+    g_assert_cmpfloat(g->pt[2],==,0);
+    g_assert_cmpint  (g->wt   ,==,3);
+
+    g= LIST_Get(grid->grid,18);
+    g_assert_cmpfloat(g->pt[0],==,-0.25);
+    g_assert_cmpfloat(g->pt[1],==,-0.25);
+    g_assert_cmpfloat(g->pt[2],==,0.50);
+    g_assert_cmpint  (g->wt   ,==,3);
+
+    g= LIST_Get(grid->grid,19);
+    g_assert_cmpfloat(g->pt[0],==,-0.25);
+    g_assert_cmpfloat(g->pt[1],==,-0.25);
+    g_assert_cmpfloat(g->pt[2],==,-0.25);
+    g_assert_cmpint  (g->wt   ,==,1);
+
+    fclose(pf);
+    KPOINTS_GRID_Free(grid);
+}
+
