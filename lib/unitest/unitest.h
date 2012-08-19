@@ -98,4 +98,10 @@ void check_KPOINTS_MESH_Read();
 void check_KPOINTS_LINE_Read();
 void check_KPOINTS_GRID_Read();
 
+/*integral.c*/
+void check_Simpson();
+void check_Simpson38();
+
+
+
 #endif

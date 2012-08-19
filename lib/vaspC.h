@@ -32,5 +32,7 @@
 /*Surface*/
 #include "vacuum.h"
 
+/*Integral*/
+#include "integral.h"
 
 #endif

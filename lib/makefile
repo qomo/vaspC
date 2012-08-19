@@ -5,7 +5,7 @@
 CC=gcc
 
 vaspC.a: list.o hash.o \
-		 line.o vmath.o gradient.o vacuum.o insort.o swap.o \
+		 line.o vmath.o gradient.o vacuum.o insort.o swap.o integral.o \
          element.o util.o \
 		 poscar.o lattice.o \
 	     potcar.o potcar.tab.o potcar.lex.o \
