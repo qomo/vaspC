@@ -78,7 +78,10 @@ int main(int argc, char** argv)
     g_test_add_func ("/KPOINTS/MESH_Read" ,  check_KPOINTS_MESH_Read);
     g_test_add_func ("/KPOINTS/LINE_Read" ,  check_KPOINTS_LINE_Read);
     g_test_add_func ("/KPOINTS/GRID_Read" ,  check_KPOINTS_GRID_Read);
-    g_test_add_func ("/INTEGRAL/Simpson" ,   check_Simpson);
-    g_test_add_func ("/INTEGRAL/Simpson38" ,   check_Simpson38);
+
+    g_test_add_func ("/INTEGRAL/Simpson_int"   ,   check_Simpson_int);
+    g_test_add_func ("/INTEGRAL/Simpson38_int" ,   check_Simpson38_int);
+    g_test_add_func ("/INTEGRAL/Simpson_float"   , check_Simpson_float);
+    g_test_add_func ("/INTEGRAL/Simpson38_float" , check_Simpson38_float);
     return g_test_run();
  }

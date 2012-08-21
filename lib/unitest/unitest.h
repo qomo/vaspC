@@ -99,9 +99,9 @@ void check_KPOINTS_LINE_Read();
 void check_KPOINTS_GRID_Read();
 
 /*integral.c*/
-void check_Simpson();
-void check_Simpson38();
-
-
+void check_Simpson_int();
+void check_Simpson38_int();
+void check_Simpson_float();
+void check_Simpson38_float();
 
 #endif
