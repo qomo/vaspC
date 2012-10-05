@@ -13,29 +13,33 @@ bool InZone(double vac[3][2], double pos[3])
 
     for (i=0; i<3; i++) 
     {
-        while (posShift[i]<vac[i][0])
-        {
-            posShift[i]++;
-        }
+        if (vac[i][0] == vac[i][1]) continue;
 
-        if (posShift[i]<vac[i][1])
+        if ((posShift[i]<vac[i][0]) && (posShift[i]<vac[i][1]))
         {
-            return true;
+            while (posShift[i]<vac[i][0])
+            {
+                posShift[i]++;
+            }
+
+            if (posShift[i]>vac[i][1])
+            {
+                return false;
+            }
+        }
+        else if ((posShift[i]>vac[i][0]) && (posShift[i]>vac[i][1]))
+        {
+            while (posShift[i]>vac[i][1])
+            {
+                posShift[i]--;
+            }
+            if (posShift[i]<vac[i][0])
+            {
+                return false;
+            }
         }
     }
-    
-    for (i=0; i<3; i++) 
-    {
-        while (posShift[i]>vac[i][1])
-        {
-            posShift[i]--;
-        }
-        if (posShift[i]>vac[i][0])
-        {
-            return true;
-        }
-    }
-    return false;
+    return true;
 }
 
 void FindAllowed(POSCAR* pos, double vac[3][2], double allow[3][2], int flag)

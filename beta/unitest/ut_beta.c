@@ -7,6 +7,7 @@
 #include "glib.h"
 #include "vaspC.h"
 #include "beta.h"
+#include "zone.h"
 #include <math.h>
 
 #define HIGH_PREC 1e-14
@@ -59,7 +60,7 @@ void check_beta_cubic()
     g_assert_cmpint(SCALAR3D_READ(sca,pos,pf),==,0);
     g_assert_cmpint(SCALAR3D_READ(scaE,posE,pfE),==,0);
 
-    beta_value=beta(sca, scaE, 0.5, vac, skip, max_pos, max_vec);
+    beta_value=beta(sca, scaE, 0.5, 2, vac, max_pos, max_vec, 2);
     g_assert_cmpfloat(beta_value,==,3);
 
     for (i=0; i<3; i++)
@@ -128,7 +129,7 @@ void check_beta_hex()
     g_assert_cmpint(SCALAR3D_READ(sca,pos,pf),==,0);
     g_assert_cmpint(SCALAR3D_READ(scaE,posE,pfE),==,0);
 
-    beta_value=beta(sca, scaE, 1.0, vac, skip, max_pos, max_vec);
+    beta_value=beta(sca, scaE, 1.0, 2, vac, max_pos, max_vec, 2);
     d= pow(1.5*cos(PI/3.),2)+pow(6.+1.5*sin(PI/3.),2)+pow(3.,2);
     g_assert_cmpfloat(beta_value,==,sqrt(d));
 
@@ -203,7 +204,7 @@ void check_beta_vac()
            skip[i][j]=0;
         }
 
-    beta_value=beta(sca, scaE, 1.0, vac, skip, max_pos, max_vec);
+    beta_value=beta(sca, scaE, 1.0, 1, vac, max_pos, max_vec, 2);
     for (i=0; i<3; i++)
         for (j=0; j<2; j++)
         {
@@ -224,7 +225,7 @@ void check_beta_vac()
     skip[2][0]= -1./12.;
     skip[2][1]=  1./12.;
 
-    beta_value=beta(sca, scaE, 1.0, vac, skip, max_pos, max_vec);
+    beta_value=beta(sca, scaE, 1.0, 0, vac, max_pos, max_vec, 2);
 
     g_assert_cmpfloat(max_pos[0],==,0./6.);
     g_assert_cmpfloat(max_pos[1],==,5./6.);
@@ -238,7 +239,7 @@ void check_beta_vac()
     skip[2][0]= -3./12.;
     skip[2][1]=  1./12.;
 
-    beta_value=beta(sca, scaE, 1.0, vac, skip, max_pos, max_vec);
+    beta_value=beta(sca, scaE, 1.0, 0, vac, max_pos, max_vec, 2);
 
     g_assert_cmpfloat(max_pos[0],==,0);
     g_assert_cmpfloat(max_pos[1],==,5./6.);
@@ -252,7 +253,7 @@ void check_beta_vac()
     skip[2][0]= -3./12.;
     skip[2][1]=  3./12.;
 
-    beta_value=beta(sca, scaE, 1.0, vac, skip, max_pos, max_vec);
+    beta_value=beta(sca, scaE, 1.0, 1, vac, max_pos, max_vec, 2);
 
     g_assert_cmpfloat(max_pos[0],==,0);
     g_assert_cmpfloat(max_pos[1],==,5./6.);
@@ -266,7 +267,7 @@ void check_beta_vac()
     skip[2][0]= -5./12.;
     skip[2][1]=  3./12.;
 
-    beta_value=beta(sca, scaE, 1.0, vac, skip, max_pos, max_vec);
+    beta_value=beta(sca, scaE, 1.0, 2, vac, max_pos, max_vec, 2);
 
     g_assert_cmpfloat(max_pos[0],==,0);
     g_assert_cmpfloat(max_pos[1],==,5./6.);
@@ -280,7 +281,7 @@ void check_beta_vac()
     skip[2][0]= -5./12.;
     skip[2][1]=  5./12.;
 
-    beta_value=beta(sca, scaE, 1.0, vac, skip, max_pos, max_vec);
+    beta_value=beta(sca, scaE, 1.0, 2, vac, max_pos, max_vec, 2);
 
     g_assert_cmpfloat(max_pos[0],==,0);
     g_assert_cmpfloat(max_pos[1],==,5./6.);
@@ -294,7 +295,7 @@ void check_beta_vac()
     skip[2][0]= -7./12.;
     skip[2][1]=  5./12.;
 
-    beta_value=beta(sca, scaE, 1.0, vac, skip, max_pos, max_vec);
+    beta_value=beta(sca, scaE, 1.0, 0, vac, max_pos, max_vec, 2);
 
     g_assert_cmpfloat(max_pos[0],==,-1);
     g_assert_cmpfloat(max_pos[1],==,-1);
@@ -310,7 +311,7 @@ void check_beta_vac()
     skip[2][0]= 0;
     skip[2][1]= 0;
 
-    beta_value=beta(sca, scaE, 1.0, vac, skip, max_pos, max_vec);
+    beta_value=beta(sca, scaE, 1.0, 0, vac, max_pos, max_vec, 2);
 
     g_assert_cmpfloat(max_pos[0],==,0);
     g_assert_cmpfloat(max_pos[1],==,0);
