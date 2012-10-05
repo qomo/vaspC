@@ -20,6 +20,7 @@ typedef struct
 
 HASH* HASH_New(int size, int (*func)(char*), bool (*equal)(char*,char*));
 void HASH_Free(HASH* hash);
+int HASH_Count(HASH* hash);
 KEY_VALUE* HASH_Lookup(HASH* hash, char* key);
 void* HASH_Set(HASH* hash, char* key, void* value);
 void* HASH_Get(HASH *hash, char *key);

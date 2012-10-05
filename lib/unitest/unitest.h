@@ -88,6 +88,7 @@ void check_base36();
 void check_equal_str();
 void check_fold();
 void check_hash_new_free();
+void check_hash_count();
 void check_hash_lookup();
 void check_hash_set_get();
 

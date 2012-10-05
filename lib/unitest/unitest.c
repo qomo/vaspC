@@ -60,6 +60,7 @@ int main(int argc, char** argv)
     g_test_add_func ("/HASH/New_Free"  ,     check_hash_new_free);
     g_test_add_func ("/HASH/Lookup"  ,       check_hash_lookup);
     g_test_add_func ("/HASH/Set_Get"  ,    check_hash_set_get);
+    g_test_add_func ("/HASH/Count"     ,     check_hash_count);
     g_test_add_func ("/POTCAR/New_Free",     check_POTCAR_New_Free);
     g_test_add_func ("/POTCAR/Set_Get",      check_POTCAR_Set_Get);
     g_test_add_func ("/POTCAR/File_Count",   check_File_Count_POTCAR);

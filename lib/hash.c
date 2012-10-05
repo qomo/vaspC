@@ -68,6 +68,17 @@ void HASH_Free(HASH* hash)
     free(hash);
 }
 
+int HASH_Count(HASH* hash)
+{
+    int i; /*temp*/
+    int ret=0;
+    for (i=0; i<hash->size; i++)    
+    {
+        if (hash->table[i].key!=NULL) ret++;
+    }
+    return ret;
+}
+
 KEY_VALUE* HASH_Lookup(HASH* hash, char* key)
 {
     int address= (hash->func(key))%(hash->size);

@@ -99,3 +99,22 @@ void check_hash_set_get()
 
     HASH_Free(hash);
 }
+
+void check_hash_count()
+{
+    int d;
+
+    fold_set(3,100);
+    HASH* hash= HASH_New(100,fold,equal_str);
+
+    d= HASH_Count(hash);
+    g_assert_cmpint(d,==,0);
+
+    char* str1="ten";
+    HASH_Set(hash, "10", POINTER_MALLOC(str1, char, strlen(str1)+1));
+
+    d= HASH_Count(hash);
+    g_assert_cmpint(d,==,1);
+
+    HASH_Free(hash);
+}
