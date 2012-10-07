@@ -6,32 +6,41 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void _SCALAR3D_Init(SCALAR3D **psca)
+/** \breif 初始化SCALAR3D
+ */
+SCALAR3D* SCALAR3D_New()
 {
     int i,j;
 
-    if ((*psca)!=NULL) _SCALAR3D_Free(psca); 
-    *psca= malloc(sizeof(SCALAR3D));
-    if ((*psca)==NULL) 
+    SCALAR3D* sca= malloc(sizeof(SCALAR3D));
+    if (sca==NULL) 
     {
-        fprintf(stderr, "SCALAR3D_Init: Memory Allocate Error.\n");
+        fprintf(stderr, "SCALAR3D_New: Memory Allocate Error.\n");
+        exit(1);
     }
-
-    for (i=0; i<3; i++)
+    
+    for (i=0; i<3; i++) 
         for (j=0; j<3; j++)
-            (*psca)->axis[i][j]=(i==j)?1:0;
+            sca->axis[i][j]=(i==j)?1:0;
 
-    for (i=0; i<3; i++)
-        (*psca)->ngrid[i]=0;     
+    for (i=0; i<3; i++) 
+        sca->ngrid[i]=0;
+        
+    sca->val= NULL;
 
-    (*psca)->val= NULL;
+    return sca;
 }
 
-void _SCALAR3D_Free(SCALAR3D **psca)
+/** \brief 釋放SCALAR3D記憶體
+ */
+void SCALAR3D_Free(SCALAR3D *sca)
 {
-    if ((*psca)->val!=NULL) free((*psca)->val);
-    free(*psca);
-    *psca=NULL;
+    if (sca->val!=NULL)
+    {
+        free(sca->val);
+        sca->val= NULL;
+    }
+    free(sca);
 }
 
 int SCALAR3D_READ( SCALAR3D* sca, POSCAR* pos, FILE* pf)
@@ -41,12 +50,21 @@ int SCALAR3D_READ( SCALAR3D* sca, POSCAR* pos, FILE* pf)
     int iline, ret;
     char cdump[POSCAR_COMMENT_LEN];
 
-    if (sca==NULL) return FIELD_NULL_SCA;
-    if (pos==NULL) return FIELD_NULL_POS;
-    if (pf==NULL)  return FILED_NULL_PF ;
-
-    POSCAR_Init(pos);
-    SCALAR3D_Init(sca);
+    if (sca==NULL)
+    {
+        fprintf(stderr, "SCALAR3D_READ: sca must not be null.");
+        exit(1);
+    }
+    if (pos==NULL)
+    {
+        fprintf(stderr, "SCALAR3D_READ: pos must not be null.");
+        exit(1);
+    } 
+    if (pf==NULL) 
+    {
+        fprintf(stderr, "SCALAR3D_READ: pf must not be null.");
+        exit(1);
+    }
 
     ret= POSCAR_Read(pos,pf);
     if (ret!=0) return ret;
@@ -86,7 +104,7 @@ int SCALAR3D_READ( SCALAR3D* sca, POSCAR* pos, FILE* pf)
     if (sca->val==NULL)
     {
         fprintf(stderr,"SCALAR3D_READ: Memroy Allocate for scalar field failed.\n");
-        exit(FIELD_MEM_VAL);
+        exit(1);
     } 
 
     /*Data*/

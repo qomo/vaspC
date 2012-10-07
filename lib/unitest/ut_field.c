@@ -8,11 +8,10 @@ void check_SCALAR3D_ReadPOSCAR()
     int ret;
     FILE *pf=NULL;
     POSCAR *pos_ref=NULL, *pos=NULL;
-    SCALAR3D *sca=NULL;
+    SCALAR3D *sca=SCALAR3D_New();
 
     POSCAR_Init(pos_ref);
     POSCAR_Init(pos);
-    SCALAR3D_Init(sca);
 
     if ((pf=fopen("data/field/LOCPOT_E0.0","r"))==NULL)
     {
@@ -50,7 +49,9 @@ void check_SCALAR3D_ReadLat()
     SCALAR3D *sca=NULL;
 
     POSCAR_Init(pos);
-    SCALAR3D_Init(sca);
+    //SCALAR3D_Init(sca);
+    sca= SCALAR3D_New();
+    //SCALAR3D_Init(sca);
 
     if ((pf=fopen("data/field/LOCPOT_E0.0","r"))==NULL)
     {
@@ -75,10 +76,9 @@ void check_SCALAR3D_ReadGrid()
     int ret;
     FILE *pf=NULL;
     POSCAR *pos=NULL;
-    SCALAR3D *sca=NULL;
+    SCALAR3D *sca=SCALAR3D_New();
 
     POSCAR_Init(pos);
-    SCALAR3D_Init(sca);
 
     if ((pf=fopen("data/field/LOCPOT_E0.0","r"))==NULL)
     {
@@ -103,10 +103,9 @@ void check_SCALAR3D_ReadVal()
     int i, ngrid, ret;
     FILE *pf=NULL;
     POSCAR *pos=NULL;
-    SCALAR3D *sca=NULL;
+    SCALAR3D *sca=SCALAR3D_New();
 
     POSCAR_Init(pos);
-    SCALAR3D_Init(sca);
 
     if ((pf=fopen("data/field/LOCPOT_Simple","r"))==NULL)
     {

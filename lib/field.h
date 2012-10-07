@@ -8,13 +8,6 @@
 #include "poscar.h"
 #include <stdio.h>
 
-enum{
-    FIELD_NULL_SCA=-8, 
-    FIELD_NULL_POS=-9, 
-    FILED_NULL_PF=-10, 
-    FIELD_MEM_VAL=-11
-    };
-
 typedef struct
 {
     double axis[3][3];
@@ -29,10 +22,8 @@ typedef struct
     double* val;
 } SCALAR1D;
 
-void _SCALAR3D_Init(SCALAR3D** sca);
-void _SCALAR3D_Free(SCALAR3D** sca);
-#define SCALAR3D_Init(x) _SCALAR3D_Init(&x)
-#define SCALAR3D_Free(x) _SCALAR3D_Free(&x)
+SCALAR3D* SCALAR3D_New();
+void SCALAR3D_Free(SCALAR3D* sca);
 int SCALAR3D_READ( SCALAR3D* sca, POSCAR* pos, FILE* pf);
 void SCALAR3D_Write(SCALAR3D* sca, POSCAR* pos, FILE* pf);
 
