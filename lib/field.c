@@ -43,6 +43,8 @@ void SCALAR3D_Free(SCALAR3D *sca)
     free(sca);
 }
 
+/** \brief 讀取CHGCAR格式
+ */
 int SCALAR3D_READ( SCALAR3D* sca, POSCAR* pos, FILE* pf)
 {
     int i,j,count;
@@ -118,29 +120,35 @@ int SCALAR3D_READ( SCALAR3D* sca, POSCAR* pos, FILE* pf)
     return 0;
 }
 
-void _SCALAR1D_Init(SCALAR1D **psca)
+/** \brief 初始化SCALAR1D
+ */
+SCALAR1D* SCALAR1D_New()
 {
-    if ((*psca)!=NULL) _SCALAR1D_Free(psca); 
-    *psca= malloc(sizeof(SCALAR1D));
-    if ((*psca)==NULL) 
+    SCALAR1D* sca= malloc(sizeof(SCALAR1D));
+    if (sca==NULL) 
     {
         fprintf(stderr, "SCALAR1D_Init: Memory Allocate Error.\n");
+        exit(1);
     }
 
-    (*psca)->axis[0]=1;
-    (*psca)->axis[1]=0;
-    (*psca)->axis[2]=0;
+    sca->axis[0]=1;
+    sca->axis[1]=0;
+    sca->axis[2]=0;
 
-    (*psca)->ngrid=0;     
+    sca->ngrid=0;     
 
-    (*psca)->val= NULL;
+    sca->val= NULL;
+    return sca;
 }
 
-void _SCALAR1D_Free(SCALAR1D **psca)
+void SCALAR1D_Free(SCALAR1D *sca)
 {
-    if ((*psca)->val!=NULL) free((*psca)->val);
-    free(*psca);
-    *psca=NULL;
+    if (sca->val!=NULL)
+    {
+        free(sca->val);
+        sca->val= NULL;
+    }
+    free(sca->val);
 }
 
 void SCALAR3D_AVE(SCALAR3D* sca3d, SCALAR1D* sca1d, int direction)

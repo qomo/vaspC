@@ -27,10 +27,8 @@ void SCALAR3D_Free(SCALAR3D* sca);
 int SCALAR3D_READ( SCALAR3D* sca, POSCAR* pos, FILE* pf);
 void SCALAR3D_Write(SCALAR3D* sca, POSCAR* pos, FILE* pf);
 
-void _SCALAR1D_Init(SCALAR1D** sca);
-void _SCALAR1D_Free(SCALAR1D** sca);
-#define SCALAR1D_Init(x) _SCALAR1D_Init(&x)
-#define SCALAR1D_Free(x) _SCALAR1D_Free(&x)
+SCALAR1D* SCALAR1D_New();
+void SCALAR1D_Free(SCALAR1D* sca);
 void SCALAR3D_AVE(SCALAR3D* sca3d, SCALAR1D* sca1d, int direction);
 
 #endif
